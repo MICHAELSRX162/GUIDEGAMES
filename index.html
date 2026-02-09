@@ -256,6 +256,62 @@
         } 
 
         footer { text-align: center; padding: 60px; color: #444; }
+
+        /* Botón Flotante de Regreso (Scroll Top) */
+        .btn-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: black;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+            z-index: 2000;
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .btn-top:hover {
+            transform: scale(1.1);
+            background: var(--accent-yellow);
+        }
+
+        /* NUEVOS ESTILOS: Reportar Bugs */
+        .bug-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .bug-form input, .bug-form textarea, .bug-form select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            background: #121212;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .bug-form label {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body> 
@@ -265,7 +321,7 @@
         <nav>
             <a href="#" onclick="showPage('inicio')">Inicio</a>
             <a href="#" onclick="showPage('guia-re4')">RE4 Remake</a>
-            <a href="#">Noticias</a>
+            <a href="#" onclick="showPage('reportar-bugs')">Reportar Bugs</a> <a href="#">Noticias</a>
         </nav>
     </header> 
 
@@ -335,7 +391,7 @@
                 <tr class="tier-row">
                     <td class="tier-badge s-tier">S</td>
                     <td class="tier-weapon-info">
-                        <img src="red9.png" class="tier-weapon-img" alt="Red9 Custom">
+                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-red9.png" class="tier-weapon-img" alt="Red9 Custom">
                         <div class="weapon-desc">
                             <h4>Red9</h4>
                             <p>Poder puro. Con su culata, es la pistola más letal y precisa del juego.</p>
@@ -345,7 +401,7 @@
                 <tr class="tier-row">
                     <td class="tier-badge a-tier">A</td>
                     <td class="tier-weapon-info">
-                        <img src="riot.png" class="tier-weapon-img" alt="Riot Shotgun">
+                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-escopeta-de-antidisturbios.png" class="tier-weapon-img" alt="Riot Shotgun">
                         <div class="weapon-desc">
                             <h4>Escopeta de Antidisturbios</h4>
                             <p>Excelente equilibrio entre daño, alcance y dispersión de perdigones.</p>
@@ -355,7 +411,7 @@
                 <tr class="tier-row">
                     <td class="tier-badge a-tier">A</td>
                     <td class="tier-weapon-info">
-                        <img src="stingray.png" class="tier-weapon-img" alt="Stingray">
+                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-stingray.png" class="tier-weapon-img" alt="Stingray">
                         <div class="weapon-desc">
                             <h4>Rifle Stingray</h4>
                             <p>Semiautomático. Indispensable para eliminar parásitos a distancia con rapidez.</p>
@@ -365,7 +421,7 @@
                 <tr class="tier-row">
                     <td class="tier-badge b-tier">B</td>
                     <td class="tier-weapon-info">
-                        <img src="tmp.png" class="tier-weapon-img" alt="TMP">
+                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-tmp.png" class="tier-weapon-img" alt="TMP">
                         <div class="weapon-desc">
                             <h4>TMP</h4>
                             <p>Alta cadencia. Ideal para aturdir enemigos y ejecutar patadas, pero gasta mucha munición.</p>
@@ -398,9 +454,38 @@
                 <div class="video-caption">3 Trucos Pro para avanzar más rápido</div>
             </a> 
 
-            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 30px;">← Volver al Inicio</button>
+            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 30px; width: 100%;">← Volver al Menú Principal</button>
         </div>
     </div> 
+
+    <div id="reportar-bugs" class="page">
+        <div class="container">
+            <h1 class="hero-title">🐛 Reportar un Error</h1>
+            <p style="text-align: center; color: var(--text-gray);">¿Encontraste algo mal en una guía o en la web? ¡Avísanos!</p>
+            
+            <div class="bug-form">
+                <form id="formBug" onsubmit="alert('Reporte enviado con éxito'); return false;">
+                    <label>Tu Nombre</label>
+                    <input type="text" placeholder="Ej. Leon Kennedy" required>
+
+                    <label>¿Dónde está el error?</label>
+                    <select required>
+                        <option value="web">Error en la Web</option>
+                        <option value="guia-re4">Error en Guía RE4</option>
+                        <option value="otro">Otro</option>
+                    </select>
+
+                    <label>Descripción del Bug</label>
+                    <textarea rows="5" placeholder="Cuéntanos qué pasó..." required></textarea>
+
+                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte</button>
+                </form>
+            </div>
+            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 20px;">← Volver al Inicio</button>
+        </div>
+    </div>
+
+    <button id="scrollToTop" class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <footer>
         &copy; 2026 GAMEGUIDES - LA MEJOR COMUNIDAD GAMER
@@ -421,24 +506,17 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             }
         }
-    </script> 
 
-</body>
-</html>
-
-   if (target) {
-                target.style.display = 'block';
-                target.classList.add('active');
-                window.scrollTo({top: 0, behavior: 'smooth'});
+        // Mostrar/Ocultar el botón flotante según el scroll
+        window.onscroll = function() {
+            const btn = document.getElementById("scrollToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
             }
-        }
+        };
     </script> 
-
 </body>
 </html>
 
-      }
-    </script> 
-
-</body>
-</html>
