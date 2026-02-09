@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -284,7 +285,7 @@
             background: var(--accent-yellow);
         }
 
-        /* NUEVOS ESTILOS: Reportar Bugs */
+        /* ESTILOS: Reportar Bugs */
         .bug-form {
             background: var(--card-bg);
             padding: 30px;
@@ -464,21 +465,21 @@
             <p style="text-align: center; color: var(--text-gray);">¿Encontraste algo mal en una guía o en la web? ¡Avísanos!</p>
             
             <div class="bug-form">
-                <form id="formBug" onsubmit="alert('Reporte enviado con éxito'); return false;">
+                <form action="https://formspree.io/f/xnjbnwlq" method="POST">
                     <label>Tu Nombre</label>
-                    <input type="text" placeholder="Ej. Leon Kennedy" required>
+                    <input type="text" name="name" placeholder="Ej. Leon Kennedy" required> 
 
                     <label>¿Dónde está el error?</label>
-                    <select required>
+                    <select name="type" required>
                         <option value="web">Error en la Web</option>
                         <option value="guia-re4">Error en Guía RE4</option>
                         <option value="otro">Otro</option>
-                    </select>
+                    </select> 
 
                     <label>Descripción del Bug</label>
-                    <textarea rows="5" placeholder="Cuéntanos qué pasó..." required></textarea>
+                    <textarea name="message" rows="5" placeholder="Cuéntanos qué pasó..." required></textarea> 
 
-                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte</button>
+                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte al Sistema</button>
                 </form>
             </div>
             <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 20px;">← Volver al Inicio</button>
@@ -507,11 +508,19 @@
             }
         }
 
-        // Mostrar/Ocultar el botón flotante según el scroll
         window.onscroll = function() {
             const btn = document.getElementById("scrollToTop");
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script> 
+</body>
+</html>
+
+;
             } else {
                 btn.style.display = "none";
             }
