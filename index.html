@@ -19,6 +19,7 @@
             --wolf-red: #ff4444;
             --boss-gold: #e1b12c;
             --puzzle-purple: #9b59b6;
+            --bonus-green: #2ecc71;
         } 
 
         * { box-sizing: border-box; }
@@ -34,7 +35,7 @@
             background: linear-gradient(45deg, #050505, #121212, #080808, #1a1a1a);
             background-size: 400% 400%;
             animation: gradientMove 15s ease infinite;
-            font-size: 16px; /* Base size */
+            font-size: 16px;
         }
 
         @keyframes gradientMove {
@@ -55,7 +56,7 @@
             z-index: 1000;
             border-bottom: 1px solid #333;
             backdrop-filter: blur(10px);
-            flex-wrap: wrap; /* Permite que el contenido baje si no cabe */
+            flex-wrap: wrap;
         } 
 
         .logo { 
@@ -86,7 +87,6 @@
         } 
         nav a:hover { color: var(--accent-yellow); background: rgba(255,255,255,0.1); } 
 
-        /* MEDIA QUERY PARA HEADER EN MOVILES MUY PEQUEÑOS */
         @media (max-width: 600px) {
             header { flex-direction: column; gap: 15px; }
             nav { width: 100%; justify-content: space-between; }
@@ -102,17 +102,47 @@
         } 
 
         .container { max-width: 1000px; margin: auto; width: 100%; }
+
+        /* SECCIÓN DE AGRADECIMIENTO */
+        .support-banner {
+            background: linear-gradient(135deg, rgba(225, 177, 44, 0.1), rgba(0, 0, 0, 0.6));
+            border: 1px solid var(--boss-gold);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(225, 177, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .support-banner h2 { margin-top: 0; color: var(--boss-gold); font-size: clamp(18px, 4vw, 24px); }
+        .support-banner p { margin-bottom: 0; font-size: 14px; }
         
         .hero-title { 
             text-align: center; 
-            font-size: clamp(28px, 8vw, 45px); /* Texto elástico */
+            font-size: clamp(28px, 8vw, 45px);
             color: var(--primary-blue); 
             margin-bottom: 40px; 
             text-shadow: 0 0 20px rgba(0,212,255,0.3);
             line-height: 1.2;
         } 
 
-        /* GRID RESPONSIVO INTELIGENTE */
         .guide-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -143,7 +173,6 @@
         }
         .btn-yellow:active { transform: scale(0.98); }
 
-        /* BOTÓN STEAM RESPONSIVO */
         .btn-steam {
             display: flex; align-items: center; justify-content: center;
             background: linear-gradient(90deg, #171a21, #1b2838); 
@@ -159,18 +188,17 @@
 
         .info-box { background: rgba(45, 45, 45, 0.7); padding: 20px; border-left: 5px solid var(--accent-yellow); margin: 30px 0; border-radius: 0 10px 10px 0; font-size: 14px; } 
 
-        /* TABLAS RESPONSIVAS (SCROLL HORIZONTAL) */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+            -webkit-overflow-scrolling: touch; 
             margin: 25px 0;
             border-radius: 10px;
             background: rgba(20,20,20,0.8);
             border: 1px solid #333;
         }
 
-        .tier-table, .boss-table, .puzzle-table { width: 100%; min-width: 600px; /* Fuerza el scroll si la pantalla es menor a 600px */ border-collapse: collapse; }
+        .tier-table, .boss-table, .puzzle-table, .costume-table { width: 100%; min-width: 600px; border-collapse: collapse; }
         .tier-row { border-bottom: 2px solid #121212; }
         .tier-badge { width: 50px; text-align: center; font-weight: bold; font-size: 20px; color: #000; padding: 10px; }
         .s-tier { background-color: var(--s-tier); }
@@ -179,8 +207,8 @@
         .tier-weapon-info { display: flex; align-items: center; padding: 10px; gap: 15px; }
         .tier-weapon-img { width: 80px; height: 50px; object-fit: contain; background: #333; border-radius: 5px; padding: 5px; flex-shrink: 0; }
 
-        .boss-table th, .puzzle-table th { padding: 12px; text-align: left; font-size: 14px; white-space: nowrap; }
-        .boss-table td, .puzzle-table td { padding: 12px; border-bottom: 1px solid #333; font-size: 14px; }
+        .boss-table th, .puzzle-table th, .costume-table th { padding: 12px; text-align: left; font-size: 14px; white-space: nowrap; }
+        .boss-table td, .puzzle-table td, .costume-table td { padding: 12px; border-bottom: 1px solid #333; font-size: 14px; }
         
         .boss-table th { background: var(--boss-gold); color: black; }
         .boss-name { color: var(--boss-gold); font-weight: bold; }
@@ -189,13 +217,24 @@
         .puzzle-loc { color: var(--puzzle-purple); font-weight: bold; }
         .puzzle-sol { font-family: 'Courier New', monospace; background: #222; padding: 5px 8px; border-radius: 5px; color: #00d4ff; font-weight: bold; display: inline-block; white-space: nowrap; }
 
-        /* VIDEOS */
+        .costume-table th { background: var(--bonus-green); color: black; }
+        .costume-name { color: var(--bonus-green); font-weight: bold; }
+        .costume-bonus { font-style: italic; color: #ddd; }
+
+        /* ESTILOS NUEVA GUIA RE8 */
+        .walkthrough-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .step-card { display: flex; align-items: center; background: rgba(20,20,20,0.6); border: 1px solid #444; border-radius: 10px; padding: 15px; transition: 0.3s; }
+        .step-card:hover { border-color: var(--accent-yellow); transform: translateX(5px); box-shadow: 0 0 10px rgba(255, 180, 0, 0.1); }
+        .step-number { font-size: 20px; font-weight: bold; color: var(--bg-dark); background: var(--accent-yellow); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%; margin-right: 15px; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content h4 { margin: 0 0 5px 0; color: white; font-size: 16px; }
+        .step-content p { margin: 0; font-size: 13px; color: #ccc; }
+
         .video-link-card { display: block; background: rgba(30,30,30,0.9); border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #333; text-decoration: none; transition: 0.3s; } 
-        .video-thumb { width: 100%; height: 0; padding-bottom: 56.25%; /* Ratio 16:9 responsive */ background-size: cover; background-position: center; position: relative; } 
+        .video-thumb { width: 100%; height: 0; padding-bottom: 56.25%; background-size: cover; background-position: center; position: relative; } 
         .video-thumb::after { content: '▶'; font-size: 40px; color: white; background: rgba(0,0,0,0.6); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 2px solid white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); } 
         .video-caption { padding: 15px; color: white; font-weight: bold; text-align: center; background: #1e1e1e; font-size: clamp(12px, 3vw, 15px); } 
 
-        /* WOLF CHAT RESPONSIVO */
         .wolf-trigger { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: #111; border: 2px solid var(--wolf-red); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2500; font-size: 25px; box-shadow: 0 0 15px rgba(255, 68, 68, 0.3); transition: 0.3s; }
         .wolf-trigger:active { transform: scale(0.9); }
         
@@ -215,12 +254,11 @@
             overflow: hidden; 
         }
 
-        /* MEDIA QUERY PARA EL CHAT EN MOVILES */
         @media (max-width: 480px) {
             #wolf-chat {
-                width: 90%; /* Ocupa el 90% del ancho */
-                left: 5%; /* Centrado */
-                height: 50vh; /* Mitad de la pantalla de alto */
+                width: 90%;
+                left: 5%;
+                height: 50vh;
                 bottom: 80px;
             }
         }
@@ -261,13 +299,19 @@
 
     <div id="inicio" class="page active">
         <div class="container">
+            
+            <div class="support-banner">
+                <h2>🎉 ¡Gracias por su apoyo!</h2>
+                <p>Gracias a nuestra increíble comunidad de supervivientes, seguimos creciendo. ¡Vuestras visitas mantienen vivo este sitio!</p>
+            </div>
+
             <h1 class="hero-title">Centro de Guías Survival Horror</h1>
             <div class="guide-grid">
                 <div class="card">
                     <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg"></div>
                     <div class="card-content">
                         <h3>Resident Evil 4 Remake</h3>
-                        <p>Guía Maestra: S+, Jefes, Armas y Todos los Tesoros.</p>
+                        <p>Guía Maestra: S+, Trajes, Jefes y Todos los Tesoros.</p>
                         <button class="btn-yellow" onclick="showPage('guia-re4')">Entrar</button>
                     </div>
                 </div> 
@@ -295,6 +339,20 @@
             <div class="info-box">
                 <h3 style="color: var(--accent-yellow);">Requisitos Rango S+ Profesional</h3>
                 <p>• <b>Tiempo:</b> < 5:30:00 <br> • <b>Guardados:</b> Máximo 15 <br> • <b>Partida:</b> Nueva Partida.</p>
+            </div>
+
+            <h2 style="color: var(--bonus-green);">🧥 Trajes y Accesorios Especiales</h2>
+            <div class="table-wrapper">
+                <table class="costume-table">
+                    <thead><tr><th>Accesorio/Traje</th><th>Efecto / Bonus</th><th>Requisito Desbloqueo</th></tr></thead>
+                    <tbody>
+                        <tr><td class="costume-name">Orejas de Gato</td><td class="costume-bonus">Munición Infinita</td><td>Completa Profesional con Rango S+.</td></tr>
+                        <tr><td class="costume-name">Armadura (Ashley)</td><td class="costume-bonus">Ashley Invencible</td><td>Completa Hardcore o superior con Rango A.</td></tr>
+                        <tr><td class="costume-name">Sombrero de Pollo</td><td class="costume-bonus">Reduce daño recibido</td><td>Completa Hardcore con Rango S+.</td></tr>
+                        <tr><td class="costume-name">Máscara de Gas</td><td class="costume-bonus">Aim Assist automático</td><td>Completa Profesional (Cualquier Rango).</td></tr>
+                        <tr><td class="costume-name">Gorro de Lobo</td><td class="costume-bonus">Más daño Melé</td><td>Completa Asistido con Rango S+.</td></tr>
+                    </tbody>
+                </table>
             </div>
 
             <h2 style="color: var(--boss-gold);">💀 Debilidades y Estrategias: Jefes RE4</h2>
@@ -355,7 +413,46 @@
                 Jugar en Steam
             </a>
 
-            <h2 style="color: var(--puzzle-purple); margin-top: 40px;">🧩 Soluciones de Puzzles</h2>
+            <h2 style="color: var(--accent-yellow); margin-top: 40px;">🗺️ Guía Paso a Paso: La Pesadilla</h2>
+            <div class="walkthrough-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>La Aldea y Luiza</h4>
+                        <p>Sobrevive al primer ataque de licántropos (huye, no pelees). Busca las dos crestas (Doncella y Demonio) para abrir la puerta al Castillo.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Castillo Dimitrescu</h4>
+                        <p>Busca las 4 máscaras de ángel mientras evitas a Lady Dimitrescu. Resuelve el puzzle de las campanas y obtén el Rifle.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Casa Beneviento</h4>
+                        <p>Zona de terror psicológico sin armas. Resuelve el puzzle de la muñeca (código 05-29-11) y huye del "bebé".</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>El Embalse (Moreau)</h4>
+                        <p>Activa los molinos evitando el agua. Cuando Moreau mute, dispárale en la boca expuesta. Recoge la Manivela.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>La Fábrica (Heisenberg)</h4>
+                        <p>Usa los moldes para crear la Llave y la Bola de Caballo. Pelea con Soldats disparando a sus luces rojas. Batalla final en tanque.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: var(--puzzle-purple);">🧩 Soluciones de Puzzles</h2>
             <div class="table-wrapper">
                 <table class="puzzle-table">
                     <thead><tr><th>Ubicación</th><th>Puzzle</th><th>Solución / Código</th></tr></thead>
@@ -381,11 +478,22 @@
                 </table>
             </div>
 
+            <h2 style="color: var(--primary-blue);">💰 Tesoros y Riquezas</h2>
+            <a href="https://www.youtube.com/watch?v=3scI3i1QydQ" target="_blank" class="video-link-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/3scI3i1QydQ/maxresdefault.jpg');"></div>
+                <div class="video-caption">Ubicación de TODOS los 8 Cofres Dorados (Mapa)</div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=n3QKSiiQPUI" target="_blank" class="video-link-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/n3QKSiiQPUI/maxresdefault.jpg');"></div>
+                <div class="video-caption">Guía de Tesoros Combinables (Máximo Valor)</div>
+            </a>
+
             <h2 style="color: var(--primary-blue);">🎥 Coleccionables</h2>
-            <a href="https://www.youtube.com/watch?v=0kFpY8p0u0M" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/0kFpY8p0u0M/maxresdefault.jpg');"></div>
+            <a href="https://youtu.be/9EdEQmsR4YQ" target="_blank" class="video-link-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/9EdEQmsR4YQ/maxresdefault.jpg');"></div>
                 <div class="video-caption">Ubicación de todas las Cabras de Madera</div>
             </a>
+
             <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
         </div>
     </div>
@@ -430,6 +538,7 @@
     </script>
 </body>
 </html>
+
 
 
 
