@@ -1,673 +1,436 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>                                                                     
- <meta name="google-site-verification" content="PhaeFDTIPt5f2a4rasrfXyLI1UzjMZd4BJd9QzId6wU" />   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameGuides - Resident Evil 4 Remake</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GameGuides - Resident Evil Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(30, 30, 30, 0.85);
             --primary-blue: #00d4ff;
             --accent-yellow: #ffb400;
             --text-gray: #b0b0b0;
             --steam-blue: #1b2838;
-            /* Colores para la Tier List */
             --s-tier: #ff7f7f;
             --a-tier: #ffbf7f;
             --b-tier: #ffff7f;
-            /* Color Asistente */
             --wolf-red: #ff4444;
+            --boss-gold: #e1b12c;
+            --puzzle-purple: #9b59b6;
         } 
+
+        * { box-sizing: border-box; }
 
         body {
             background-color: var(--bg-dark);
             color: white;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
+            padding: 0;
             line-height: 1.6;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        } 
+            background: linear-gradient(45deg, #050505, #121212, #080808, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            font-size: 16px; /* Base size */
+        }
 
-        /* NAVBAR */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* HEADER DINÁMICO */
         header {
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap; /* Permite que el contenido baje si no cabe */
         } 
 
-        .logo {
-            color: var(--primary-blue);
+        .logo { 
+            color: var(--primary-blue); 
+            font-weight: bold; 
+            font-size: clamp(20px, 5vw, 24px); 
+            text-decoration: none; 
+            cursor: pointer; 
+            flex-shrink: 0;
+        } 
+
+        nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: clamp(11px, 3vw, 13px); 
+            text-transform: uppercase; 
+            transition: 0.3s; 
             font-weight: bold;
-            font-size: 24px;
-            text-decoration: none;
-            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
         } 
+        nav a:hover { color: var(--accent-yellow); background: rgba(255,255,255,0.1); } 
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: 0.3s;
-        } 
+        /* MEDIA QUERY PARA HEADER EN MOVILES MUY PEQUEÑOS */
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 15px; }
+            nav { width: 100%; justify-content: space-between; }
+            nav a { margin: 0; font-size: 11px; text-align: center; }
+        }
 
-        nav a:hover { color: var(--accent-yellow); } 
-
-        /* SECCIONES */
-        .page {
-            display: none; 
-            padding: 40px 20px;
-            animation: fadeIn 0.5s ease;
-        } 
-
-        .active {
-            display: block; 
-        } 
+        .page { display: none; padding: 20px 5%; animation: fadeIn 0.6s ease; padding-bottom: 100px; } 
+        .active { display: block; } 
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         } 
 
-        /* ESTILO INICIO */
-        .container { max-width: 1200px; margin: auto; }
+        .container { max-width: 1000px; margin: auto; width: 100%; }
         
-        .hero-title {
-            text-align: center;
-            font-size: 45px;
-            color: var(--primary-blue);
-            margin-bottom: 50px;
+        .hero-title { 
+            text-align: center; 
+            font-size: clamp(28px, 8vw, 45px); /* Texto elástico */
+            color: var(--primary-blue); 
+            margin-bottom: 40px; 
+            text-shadow: 0 0 20px rgba(0,212,255,0.3);
+            line-height: 1.2;
         } 
 
-        .guide-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* GRID RESPONSIVO INTELIGENTE */
+        .guide-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
         } 
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: 0.3s ease;
-            border: 1px solid #333;
-        } 
-
-        .card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--primary-blue);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-        } 
-
-        .card-img-wrapper {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        } 
-
-        .card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.5s ease;
-        } 
-
-        .card:hover img {
-            transform: scale(1.1);
-        } 
-
+        .card { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s ease; border: 1px solid #333; backdrop-filter: blur(8px); } 
+        .card:hover { transform: translateY(-5px); border-color: var(--primary-blue); } 
+        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; } 
+        .card img { width: 100%; height: 100%; object-fit: cover; } 
         .card-content { padding: 20px; } 
 
-        .btn-yellow {
-            display: inline-block;
-            background: var(--accent-yellow);
-            color: black;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            cursor: pointer;
-            border: none;
-            transition: 0.2s;
+        .btn-yellow { 
+            display: block; 
+            width: 100%; 
+            background: var(--accent-yellow); 
+            color: black; 
+            padding: 12px 0; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            cursor: pointer; 
+            border: none; 
+            transition: 0.3s; 
+            text-align: center; 
+            font-size: 16px;
         }
-        
-        .btn-yellow:hover {
-            filter: brightness(1.2);
-            transform: scale(1.05);
-        } 
+        .btn-yellow:active { transform: scale(0.98); }
 
-        /* BOTÓN DE STEAM (NUEVO) */
+        /* BOTÓN STEAM RESPONSIVO */
         .btn-steam {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--steam-blue);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            gap: 10px;
-            margin: 20px 0;
-            transition: 0.3s;
-            border: 1px solid #2a475e;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(90deg, #171a21, #1b2838); 
+            color: white; padding: 15px 20px; border-radius: 8px; 
+            text-decoration: none; font-weight: bold; gap: 10px; 
+            margin: 20px auto; border: 1px solid #2a475e; 
+            transition: 0.3s; width: 100%; max-width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-size: clamp(14px, 4vw, 16px);
         }
+        .btn-steam:hover { background: #2a475e; border-color: #66c0f4; transform: translateY(-3px); }
+        .btn-steam img { width: 24px; filter: drop-shadow(0 0 2px rgba(255,255,255,0.5)); }
 
-        .btn-steam:hover {
-            background: #2a475e;
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
-        }
+        .info-box { background: rgba(45, 45, 45, 0.7); padding: 20px; border-left: 5px solid var(--accent-yellow); margin: 30px 0; border-radius: 0 10px 10px 0; font-size: 14px; } 
 
-        .btn-steam img {
-            width: 20px;
-        }
-
-        /* ESTILO GUIA INTERNA */
-        .guide-header-img {
+        /* TABLAS RESPONSIVAS (SCROLL HORIZONTAL) */
+        .table-wrapper {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        } 
-
-        .info-box {
-            background: #252525;
-            padding: 25px;
-            border-left: 5px solid var(--accent-yellow);
-            margin: 30px 0;
-        } 
-
-        /* ESTILO TIER LIST */
-        .tier-table {
-            width: 100%;
-            border-collapse: collapse;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
             margin: 25px 0;
-            background: #1a1a1a;
             border-radius: 10px;
-            overflow: hidden;
+            background: rgba(20,20,20,0.8);
+            border: 1px solid #333;
         }
 
-        .tier-row {
-            border-bottom: 2px solid #121212;
-        }
-
-        .tier-badge {
-            width: 60px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 24px;
-            color: #000;
-        }
-
+        .tier-table, .boss-table, .puzzle-table { width: 100%; min-width: 600px; /* Fuerza el scroll si la pantalla es menor a 600px */ border-collapse: collapse; }
+        .tier-row { border-bottom: 2px solid #121212; }
+        .tier-badge { width: 50px; text-align: center; font-weight: bold; font-size: 20px; color: #000; padding: 10px; }
         .s-tier { background-color: var(--s-tier); }
         .a-tier { background-color: var(--a-tier); }
         .b-tier { background-color: var(--b-tier); }
+        .tier-weapon-info { display: flex; align-items: center; padding: 10px; gap: 15px; }
+        .tier-weapon-img { width: 80px; height: 50px; object-fit: contain; background: #333; border-radius: 5px; padding: 5px; flex-shrink: 0; }
 
-        .tier-weapon-info {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            gap: 20px;
-        }
+        .boss-table th, .puzzle-table th { padding: 12px; text-align: left; font-size: 14px; white-space: nowrap; }
+        .boss-table td, .puzzle-table td { padding: 12px; border-bottom: 1px solid #333; font-size: 14px; }
+        
+        .boss-table th { background: var(--boss-gold); color: black; }
+        .boss-name { color: var(--boss-gold); font-weight: bold; }
 
-        .tier-weapon-img {
-            width: 100px;
-            height: 60px;
-            object-fit: contain;
-            background: #333;
-            border-radius: 5px;
-            padding: 5px;
-        }
+        .puzzle-table th { background: var(--puzzle-purple); color: white; }
+        .puzzle-loc { color: var(--puzzle-purple); font-weight: bold; }
+        .puzzle-sol { font-family: 'Courier New', monospace; background: #222; padding: 5px 8px; border-radius: 5px; color: #00d4ff; font-weight: bold; display: inline-block; white-space: nowrap; }
 
-        .weapon-desc h4 { margin: 0; color: white; }
-        .weapon-desc p { margin: 5px 0 0; font-size: 13px; color: var(--text-gray); }
+        /* VIDEOS */
+        .video-link-card { display: block; background: rgba(30,30,30,0.9); border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #333; text-decoration: none; transition: 0.3s; } 
+        .video-thumb { width: 100%; height: 0; padding-bottom: 56.25%; /* Ratio 16:9 responsive */ background-size: cover; background-position: center; position: relative; } 
+        .video-thumb::after { content: '▶'; font-size: 40px; color: white; background: rgba(0,0,0,0.6); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 2px solid white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); } 
+        .video-caption { padding: 15px; color: white; font-weight: bold; text-align: center; background: #1e1e1e; font-size: clamp(12px, 3vw, 15px); } 
 
-        /* Tarjetas de Video */
-        .video-link-card {
-            display: block;
-            background: #252525;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            border: 1px solid #333;
-            text-decoration: none;
-            transition: 0.3s;
-        } 
-
-        .video-link-card:hover {
-            border-color: var(--primary-blue);
-            transform: scale(1.02);
-        } 
-
-        .video-thumb {
-            width: 100%;
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        } 
-
-        .video-thumb::after {
-            content: '▶';
-            font-size: 40px;
-            color: white;
-            background: rgba(0, 0, 0, 0.6);
-            width: 70px;
-            height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: 2px solid white;
-        } 
-
-        .video-caption {
-            padding: 15px;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            background: #1e1e1e;
-        } 
-
-        footer { text-align: center; padding: 60px; color: #444; }
-
-        /* Botón Flotante de Regreso (Scroll Top) */
-        .btn-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary-blue);
-            color: black;
-            border-radius: 50%;
-            border: none;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
-            z-index: 2000;
+        /* WOLF CHAT RESPONSIVO */
+        .wolf-trigger { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: #111; border: 2px solid var(--wolf-red); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2500; font-size: 25px; box-shadow: 0 0 15px rgba(255, 68, 68, 0.3); transition: 0.3s; }
+        .wolf-trigger:active { transform: scale(0.9); }
+        
+        #wolf-chat { 
+            position: fixed; 
+            bottom: 80px; 
+            left: 20px; 
+            width: 300px; 
+            height: 400px; 
+            background: #121212; 
+            border: 2px solid var(--wolf-red); 
+            border-radius: 15px; 
             display: none; 
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
+            flex-direction: column; 
+            z-index: 3000; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9); 
+            overflow: hidden; 
         }
 
-        .btn-top:hover {
-            transform: scale(1.1);
-            background: var(--accent-yellow);
+        /* MEDIA QUERY PARA EL CHAT EN MOVILES */
+        @media (max-width: 480px) {
+            #wolf-chat {
+                width: 90%; /* Ocupa el 90% del ancho */
+                left: 5%; /* Centrado */
+                height: 50vh; /* Mitad de la pantalla de alto */
+                bottom: 80px;
+            }
         }
 
-        /* ESTILOS: Reportar Bugs */
-        .bug-form {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            max-width: 600px;
-            margin: 20px auto;
-            text-align: left;
-        }
-
-        .bug-form input, .bug-form textarea, .bug-form select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            background: #121212;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            box-sizing: border-box;
-        }
-
-        .bug-form label {
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
-
-        /* ESTILOS ASISTENTE VIRTUAL */
-        .wolf-trigger {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            background: #1a1a1a;
-            border: 2px solid var(--wolf-red);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 2500;
-            box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
-            font-size: 30px;
-            transition: 0.3s;
-        }
-
-        .wolf-trigger:hover { transform: scale(1.1); }
-
-        #wolf-chat {
-            position: fixed;
-            bottom: 100px;
-            left: 30px;
-            width: 300px;
-            height: 400px;
-            background: var(--card-bg);
-            border: 2px solid var(--wolf-red);
-            border-radius: 15px;
-            display: none;
-            flex-direction: column;
-            z-index: 3000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: var(--wolf-red);
-            padding: 15px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 13px;
-        }
-
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 80%; }
+        .chat-header { background: var(--wolf-red); padding: 12px; font-weight: bold; display: flex; justify-content: space-between; font-size: 14px; }
+        .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; word-wrap: break-word; }
         .bot { background: #333; align-self: flex-start; border-left: 3px solid var(--wolf-red); }
         .user { background: var(--primary-blue); color: black; align-self: flex-end; }
+        .chat-footer { padding: 10px; display: flex; gap: 5px; background: #000; }
+        .chat-footer input { flex: 1; padding: 10px; background: #222; color: white; border: 1px solid #444; border-radius: 5px; outline: none; font-size: 14px; }
+        .chat-footer button { background: var(--wolf-red); border: none; color: white; padding: 0 15px; border-radius: 5px; cursor: pointer; font-size: 18px; }
 
-        .chat-footer { padding: 10px; display: flex; gap: 5px; background: #111; }
-        .chat-footer input { 
-            flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #444; 
-            background: #222; color: white; outline: none;
-        }
-        .chat-footer button { 
-            background: var(--wolf-red); border: none; color: white; 
-            padding: 5px 10px; border-radius: 5px; cursor: pointer; 
-        }
+        footer { text-align: center; padding: 40px 20px; color: #555; border-top: 1px solid #222; font-size: 12px; }
     </style>
 </head>
-<body> 
+<body>
 
     <header>
         <div class="logo" onclick="showPage('inicio')">GameGuides</div>
         <nav>
             <a href="#" onclick="showPage('inicio')">Inicio</a>
             <a href="#" onclick="showPage('guia-re4')">RE4 Remake</a>
-            <a href="#" onclick="showPage('reportar-bugs')">Reportar Bugs</a> <a href="#">Noticias</a>
+            <a href="#" onclick="showPage('guia-re8')">RE8 Village</a>
+            <a href="#" onclick="showPage('reportar-bugs')">Bugs</a>
         </nav>
-    </header> 
+    </header>
 
     <div class="wolf-trigger" onclick="toggleWolf()">🐺</div>
     <div id="wolf-chat">
-        <div class="chat-header">
-            <span>Asistente Lobo Rojo</span>
-            <span style="cursor:pointer" onclick="toggleWolf()">×</span>
-        </div>
-        <div class="chat-body" id="wolf-msgs">
-            <div class="msg bot">¡Grrr! Soy el Lobo Rojo. ¿En qué parte de la misión necesitas ayuda estratégica?</div>
-        </div>
+        <div class="chat-header"><span>Lobo Rojo</span><span style="cursor:pointer" onclick="toggleWolf()">×</span></div>
+        <div class="chat-body" id="wolf-msgs"><div class="msg bot">¡Grrr! Sistema responsivo activado. Me ajusto a cualquier pantalla, maestro.</div></div>
         <div class="chat-footer">
-            <input type="text" id="wolf-input" placeholder="Pregunta algo..." onkeypress="if(event.key=='Enter') sendWolfMsg()">
+            <input type="text" id="wolf-input" placeholder="Escribe..." onkeypress="if(event.key=='Enter') sendWolfMsg()">
             <button onclick="sendWolfMsg()">➤</button>
         </div>
     </div>
 
     <div id="inicio" class="page active">
         <div class="container">
-            <h1 class="hero-title">Descubre, Domina, Conquista</h1>
-            
+            <h1 class="hero-title">Centro de Guías Survival Horror</h1>
             <div class="guide-grid">
                 <div class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg" alt="RE4">
-                    </div>
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg"></div>
                     <div class="card-content">
-                        <h3>Resident Evil 4 Remake: Guía Definitiva</h3>
-                        <p>Tesoros, Speedrun y los mejores consejos para dominar el juego en dificultad Profesional.</p>
-                        <button class="btn-yellow" onclick="showPage('guia-re4')">Ver Contenido</button>
+                        <h3>Resident Evil 4 Remake</h3>
+                        <p>Guía Maestra: S+, Jefes, Armas y Todos los Tesoros.</p>
+                        <button class="btn-yellow" onclick="showPage('guia-re4')">Entrar</button>
                     </div>
                 </div> 
-
                 <div class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/capsule_616x353.jpg" alt="Hogwarts">
-                    </div>
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1196590/capsule_616x353.jpg"></div>
                     <div class="card-content">
-                        <h3>Hogwarts Legacy: Guía de Vuelo</h3>
-                        <p>Aprende a dominar las escobas y desbloquear monturas legendarias.</p>
-                        <button class="btn-yellow">Próximamente</button>
+                        <h3>Resident Evil Village</h3>
+                        <p>Jefes, Secretos, Puzzles y Coleccionables de la Aldea.</p>
+                        <button class="btn-yellow" onclick="showPage('guia-re8')">Entrar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
     <div id="guia-re4" class="page">
-        <div class="container" style="max-width: 900px;">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/library_600x900.jpg" class="guide-header-img">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--wolf-red);">RE4 Remake: El Camino al S+</h1>
             
-            <h1 style="color: var(--primary-blue); margin-top: 30px;">Resident Evil 4 Remake</h1>
-
             <a href="https://store.steampowered.com/app/2050650/Resident_Evil_4/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam logo">
-                Comprar en Steam
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
             </a>
 
-            <h2 style="color: var(--accent-yellow); border-bottom: 1px solid #333; padding-bottom: 10px;">💎 Guía de Tesoros y Joyas</h2>
-            <p style="color: var(--text-gray);">Localización completa por regiones</p> 
-
             <div class="info-box">
-                <h2>Consejo del Buhonero</h2>
-                <p>No vendas gemas sueltas. Incrústalas en objetos para aumentar su valor hasta en un 50%.</p>
-            </div> 
+                <h3 style="color: var(--accent-yellow);">Requisitos Rango S+ Profesional</h3>
+                <p>• <b>Tiempo:</b> < 5:30:00 <br> • <b>Guardados:</b> Máximo 15 <br> • <b>Partida:</b> Nueva Partida.</p>
+            </div>
 
+            <h2 style="color: var(--boss-gold);">💀 Debilidades y Estrategias: Jefes RE4</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th>Jefe</th><th>Debilidad</th><th>Estrategia Pro</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name">Del Lago</td><td>Boca abierta</td><td>Lanza arpones sin parar y esquiva los troncos.</td></tr>
+                        <tr><td class="boss-name">El Gigante</td><td>Plaga espalda</td><td>Cégalo con granada cuando salga la plaga y usa el rifle.</td></tr>
+                        <tr><td class="boss-name">Méndez</td><td>Columna</td><td>Usa el cuchillo para parrys y granadas en fase 2.</td></tr>
+                        <tr><td class="boss-name">Verdugo</td><td>Nitrógeno</td><td>Congélalo con tanques antes de disparar Magnum.</td></tr>
+                        <tr><td class="boss-name">Salazar</td><td>Cuerpo humano</td><td><b>Huevo Dorado:</b> Lánzalo para quitarle casi toda la vida.</td></tr>
+                        <tr><td class="boss-name">Krauser</td><td>Cuchillo</td><td>El cuchillo es más efectivo que las balas contra él.</td></tr>
+                        <tr><td class="boss-name">Saddler</td><td>Ojos en patas</td><td>Revienta los ojos para aturdirlo y apuñalar el ojo central.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--primary-blue);">💎 Trilogía de Mapas del Tesoro</h2>
             <a href="https://www.youtube.com/watch?v=ryzwPfPpehU" target="_blank" class="video-link-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/ryzwPfPpehU/maxresdefault.jpg');"></div>
-                <div class="video-caption">Ver Tesoros del PUEBLO</div>
-            </a> 
-
+                <div class="video-caption">TESOROS: Región del PUEBLO</div>
+            </a>
             <a href="https://www.youtube.com/watch?v=ruv-7O5MgeE" target="_blank" class="video-link-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/ruv-7O5MgeE/maxresdefault.jpg');"></div>
-                <div class="video-caption">Ver Tesoros del CASTILLO</div>
-            </a> 
-
+                <div class="video-caption">TESOROS: Región del CASTILLO</div>
+            </a>
             <a href="https://www.youtube.com/watch?v=GTBvk08RjRM" target="_blank" class="video-link-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/GTBvk08RjRM/maxresdefault.jpg');"></div>
-                <div class="video-caption">Ver Tesoros de la ISLA</div>
-            </a> 
+                <div class="video-caption">TESOROS: Región de la ISLA</div>
+            </a>
 
-            <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+            <h2 style="color: var(--wolf-red);">🚀 Speedrun Skips</h2>
+            <a href="https://www.youtube.com/watch?v=OC5Qrb7-zI8" target="_blank" class="video-link-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/OC5Qrb7-zI8/maxresdefault.jpg');"></div>
+                <div class="video-caption">28 SKIPS y ATAJOS para Rango S+ (Actualizado)</div>
+            </a>
 
-            <h1 style="color: var(--primary-blue);">🔫 Tier List de Armas</h1>
-            <p style="color: var(--accent-yellow); font-weight: bold;">Las mejores armas del arsenal de Leon</p>
-
-            <table class="tier-table">
-                <tr class="tier-row">
-                    <td class="tier-badge s-tier">S</td>
-                    <td class="tier-weapon-info">
-                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-red9.png" class="tier-weapon-img" alt="Red9 Custom">
-                        <div class="weapon-desc">
-                            <h4>Red9</h4>
-                            <p>Poder puro. Con su culata, es la pistola más letal y precisa del juego.</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tier-row">
-                    <td class="tier-badge a-tier">A</td>
-                    <td class="tier-weapon-info">
-                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-escopeta-de-antidisturbios.png" class="tier-weapon-img" alt="Riot Shotgun">
-                        <div class="weapon-desc">
-                            <h4>Escopeta de Antidisturbios</h4>
-                            <p>Excelente equilibrio entre daño, alcance y dispersión de perdigones.</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tier-row">
-                    <td class="tier-badge a-tier">A</td>
-                    <td class="tier-weapon-info">
-                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-stingray.png" class="tier-weapon-img" alt="Stingray">
-                        <div class="weapon-desc">
-                            <h4>Rifle Stingray</h4>
-                            <p>Semiautomático. Indispensable para eliminar parásitos a distancia con rapidez.</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tier-row">
-                    <td class="tier-badge b-tier">B</td>
-                    <td class="tier-weapon-info">
-                        <img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-tmp.png" class="tier-weapon-img" alt="TMP">
-                        <div class="weapon-desc">
-                            <h4>TMP</h4>
-                            <p>Alta cadencia. Ideal para aturdir enemigos y ejecutar patadas, pero gasta mucha munición.</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-            <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;"> 
-
-            <h1 style="color: var(--primary-blue);">🚀 Speedrun & Pro Tips</h1>
-            <p style="color: var(--accent-yellow); font-weight: bold;">Cómo terminar el juego más rápido y obtener Rango S+</p> 
-
-            <div class="info-box" style="border-left-color: var(--primary-blue);">
-                <h2>Estrategias de Rango S+</h2>
-                <ul style="color: var(--text-gray); padding-left: 20px;">
-                    <li><b>Saltarse secciones:</b> Usa granadas para destruir la puerta del castillo o el muro de la cantera.</li>
-                    <li><b>Dificultad Profesional:</b> Termina en menos de 5:30h con un máximo de 15 guardados.</li>
-                    <li><b>Accesorios:</b> Usa las "Orejas de Gato" para tener munición infinita en todas las armas.</li>
-                </ul>
-            </div> 
-
-            <a href="https://www.youtube.com/watch?v=5vcn4ftDD-U" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/5vcn4ftDD-U/maxresdefault.jpg');"></div>
-                <div class="video-caption">Guía Rango S+ Profesional (Speedrun)</div>
-            </a> 
-
-            <a href="https://www.youtube.com/watch?v=R85_kwy2fOQ" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/R85_kwy2fOQ/maxresdefault.jpg');"></div>
-                <div class="video-caption">3 Trucos Pro para avanzar más rápido</div>
-            </a> 
-
-            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 30px; width: 100%;">← Volver al Menú Principal</button>
-        </div>
-    </div> 
-
-    <div id="reportar-bugs" class="page">
-        <div class="container">
-            <h1 class="hero-title">🐛 Reportar un Error</h1>
-            <p style="text-align: center; color: var(--text-gray);">¿Encontraste algo mal en una guía o en la web? ¡Avísanos!</p>
-            
-            <div class="bug-form">
-                <form action="https://formspree.io/f/xnjbnwlq" method="POST">
-                    <label>Tu Nombre</label>
-                    <input type="text" name="name" placeholder="Ej. Leon Kennedy" required> 
-
-                    <label>¿Dónde está el error?</label>
-                    <select name="type" required>
-                        <option value="web">Error en la Web</option>
-                        <option value="guia-re4">Error en Guía RE4</option>
-                        <option value="otro">Otro</option>
-                    </select> 
-
-                    <label>Descripción del Bug</label>
-                    <textarea name="message" rows="5" placeholder="Cuéntanos qué pasó..." required></textarea> 
-
-                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte al Sistema</button>
-                </form>
+            <h2 style="color: var(--accent-yellow);">🔫 Tier List de Armas</h2>
+            <div class="table-wrapper">
+                <table class="tier-table">
+                    <tr class="tier-row"><td class="tier-badge s-tier">S</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-red9.png" class="tier-weapon-img"><div><strong>Red9 + Culata</strong><p>Poder destructivo puro.</p></div></td></tr>
+                    <tr class="tier-row"><td class="tier-badge a-tier">A</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-escopeta-de-antidisturbios.png" class="tier-weapon-img"><div><strong>Riot Shotgun</strong><p>La mejor para despejar pasillos.</p></div></td></tr>
+                    <tr class="tier-row"><td class="tier-badge b-tier">B</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-tmp.png" class="tier-weapon-img"><div><strong>TMP</strong><p>Excelente para aturdir enemigos.</p></div></td></tr>
+                </table>
             </div>
-            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top: 20px;">← Volver al Inicio</button>
+
+            <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
         </div>
     </div>
 
-    <button id="scrollToTop" class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <div id="guia-re8" class="page">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--boss-gold);">RE8 Village: Estrategias</h1>
+            
+            <a href="https://store.steampowered.com/app/1196590/Resident_Evil_Village/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
+            </a>
 
-    <footer>
-        &copy; 2026 GAMEGUIDES - LA MEJOR COMUNIDAD GAMER
-    </footer> 
+            <h2 style="color: var(--puzzle-purple); margin-top: 40px;">🧩 Soluciones de Puzzles</h2>
+            <div class="table-wrapper">
+                <table class="puzzle-table">
+                    <thead><tr><th>Ubicación</th><th>Puzzle</th><th>Solución / Código</th></tr></thead>
+                    <tbody>
+                        <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Candado Taller</td><td class="puzzle-sol">05-29-11</td></tr>
+                        <tr><td class="puzzle-loc">Casa del Luthier</td><td>Candado Armario</td><td class="puzzle-sol">27-09-17</td></tr>
+                        <tr><td class="puzzle-loc">Sala de Abluciones</td><td>Estatuas</td><td>Mujeres miran a la mujer (con capucha). Campesinos miran al jinete.</td></tr>
+                        <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Caja de Música</td><td>Ordena los cilindros para que las marcas coincidan (mira las grietas).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--boss-gold);">💀 Debilidades de Jefes RE8</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th>Jefe</th><th>Punto Débil</th><th>Estrategia</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name">Lady Dimitrescu</td><td>Cuerpo humano</td><td>Ataca a la mujer sobre el dragón con el rifle.</td></tr>
+                        <tr><td class="boss-name">Moreau</td><td>Figura interna</td><td>Usa explosivos y minas cuando esté en tierra.</td></tr>
+                        <tr><td class="boss-name">Heisenberg</td><td>Zonas rojas</td><td>Destruye los tanques con el cañón del tanque.</td></tr>
+                        <tr><td class="boss-name">Madre Miranda</td><td>Cabeza</td><td>Guarda la Magnum para su fase final de luz.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--primary-blue);">🎥 Coleccionables</h2>
+            <a href="https://www.youtube.com/watch?v=0kFpY8p0u0M" target="_blank" class="video-link-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/0kFpY8p0u0M/maxresdefault.jpg');"></div>
+                <div class="video-caption">Ubicación de todas las Cabras de Madera</div>
+            </a>
+            <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
+        </div>
+    </div>
+
+    <div id="reportar-bugs" class="page">
+        <div class="container">
+            <h1 class="hero-title">🐛 Reportar Error</h1>
+            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid #333;">
+                <form action="https://formspree.io/f/xnjbnwlq" method="POST">
+                    <input type="text" name="name" placeholder="Tu Nombre" style="width:100%; padding:12px; margin-bottom:20px; background:#111; border:1px solid #444; color:white; border-radius:8px; font-size:16px;" required>
+                    <textarea name="message" placeholder="¿Qué error encontraste?" style="width:100%; padding:12px; height:100px; background:#111; border:1px solid #444; color:white; border-radius:8px; font-size:16px;" required></textarea>
+                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte</button>
+                </form>
+            </div>
+            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top:20px;">Volver</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 GAMEGUIDES - DISEÑO 100% RESPONSIVO</footer>
 
     <script>
         function showPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.style.display = 'none';
-                page.classList.remove('active');
-            }); 
-
-            const target = document.getElementById(pageId);
-            if (target) {
-                target.style.display = 'block';
-                target.classList.add('active');
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
-
-        window.onscroll = function() {
-            const btn = document.getElementById("scrollToTop");
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btn.style.display = "flex";
-            } else {
-                btn.style.display = "none";
-            }
-        };
-
-        // LÓGICA DEL ASISTENTE
         function toggleWolf() {
             const chat = document.getElementById('wolf-chat');
             chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
         }
-
         function sendWolfMsg() {
             const input = document.getElementById('wolf-input');
             const msgs = document.getElementById('wolf-msgs');
             if(input.value.trim() == "") return;
-
-            // Mensaje Usuario
             msgs.innerHTML += `<div class="msg user">${input.value}</div>`;
-            const query = input.value.toLowerCase();
             input.value = "";
-
-            // Respuesta Bot
             setTimeout(() => {
-                let reply = "¡Grrr! No tengo esa información en mi olfato, pero revisa las guías de la página.";
-                if(query.includes("hola")) reply = "¡Saludos, superviviente! ¿Buscas tesoros o armas?";
-                if(query.includes("tesoro")) reply = "Los tesoros están divididos por zonas (Pueblo, Castillo e Isla). ¡Mira los videos!";
-                if(query.includes("arma")) reply = "Mi favorita es la Red9, pero el Stingray es vital para los Regeneradores.";
-                if(query.includes("s+")) reply = "Para el S+ Profesional necesitas terminar en menos de 5h 30min y máximo 15 guardados.";
-                
-                msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
+                msgs.innerHTML += `<div class="msg bot">¡Grrr! Sistema responsivo funcionando. ¿Qué más necesitas?</div>`;
                 msgs.scrollTop = msgs.scrollHeight;
             }, 600);
         }
-    </script> 
+    </script>
 </body>
 </html>
+
 
 
 
