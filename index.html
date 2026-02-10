@@ -12,6 +12,7 @@
             --primary-blue: #00d4ff;
             --accent-yellow: #ffb400;
             --text-gray: #b0b0b0;
+            --steam-blue: #1b2838;
             /* Colores para la Tier List */
             --s-tier: #ff7f7f;
             --a-tier: #ffbf7f;
@@ -145,6 +146,33 @@
             filter: brightness(1.2);
             transform: scale(1.05);
         } 
+
+        /* BOTÓN DE STEAM (NUEVO) */
+        .btn-steam {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--steam-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            gap: 10px;
+            margin: 20px 0;
+            transition: 0.3s;
+            border: 1px solid #2a475e;
+        }
+
+        .btn-steam:hover {
+            background: #2a475e;
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-steam img {
+            width: 20px;
+        }
 
         /* ESTILO GUIA INTERNA */
         .guide-header-img {
@@ -315,7 +343,7 @@
             font-weight: bold;
         }
 
-        /* ESTILOS ASISTENTE VIRTUAL (NUEVO) */
+        /* ESTILOS ASISTENTE VIRTUAL */
         .wolf-trigger {
             position: fixed;
             bottom: 30px;
@@ -446,8 +474,15 @@
         <div class="container" style="max-width: 900px;">
             <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/library_600x900.jpg" class="guide-header-img">
             
-            <h1 style="color: var(--primary-blue); margin-top: 30px;">💎 Guía de Tesoros y Joyas</h1>
-            <p style="color: var(--accent-yellow); font-weight: bold;">Localización completa por regiones</p> 
+            <h1 style="color: var(--primary-blue); margin-top: 30px;">Resident Evil 4 Remake</h1>
+
+            <a href="https://store.steampowered.com/app/2050650/Resident_Evil_4/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam logo">
+                Comprar en Steam
+            </a>
+
+            <h2 style="color: var(--accent-yellow); border-bottom: 1px solid #333; padding-bottom: 10px;">💎 Guía de Tesoros y Joyas</h2>
+            <p style="color: var(--text-gray);">Localización completa por regiones</p> 
 
             <div class="info-box">
                 <h2>Consejo del Buhonero</h2>
@@ -603,7 +638,7 @@
             }
         };
 
-        // LÓGICA DEL ASISTENTE (NUEVO)
+        // LÓGICA DEL ASISTENTE
         function toggleWolf() {
             const chat = document.getElementById('wolf-chat');
             chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
@@ -634,6 +669,7 @@
     </script> 
 </body>
 </html>
+
 
 
 
