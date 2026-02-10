@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +16,8 @@
             --s-tier: #ff7f7f;
             --a-tier: #ffbf7f;
             --b-tier: #ffff7f;
+            /* Color Asistente */
+            --wolf-red: #ff4444;
         } 
 
         body {
@@ -313,6 +314,76 @@
             color: var(--primary-blue);
             font-weight: bold;
         }
+
+        /* ESTILOS ASISTENTE VIRTUAL (NUEVO) */
+        .wolf-trigger {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            border: 2px solid var(--wolf-red);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2500;
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+            font-size: 30px;
+            transition: 0.3s;
+        }
+
+        .wolf-trigger:hover { transform: scale(1.1); }
+
+        #wolf-chat {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 300px;
+            height: 400px;
+            background: var(--card-bg);
+            border: 2px solid var(--wolf-red);
+            border-radius: 15px;
+            display: none;
+            flex-direction: column;
+            z-index: 3000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--wolf-red);
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .msg { padding: 8px 12px; border-radius: 10px; max-width: 80%; }
+        .bot { background: #333; align-self: flex-start; border-left: 3px solid var(--wolf-red); }
+        .user { background: var(--primary-blue); color: black; align-self: flex-end; }
+
+        .chat-footer { padding: 10px; display: flex; gap: 5px; background: #111; }
+        .chat-footer input { 
+            flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #444; 
+            background: #222; color: white; outline: none;
+        }
+        .chat-footer button { 
+            background: var(--wolf-red); border: none; color: white; 
+            padding: 5px 10px; border-radius: 5px; cursor: pointer; 
+        }
     </style>
 </head>
 <body> 
@@ -325,6 +396,21 @@
             <a href="#" onclick="showPage('reportar-bugs')">Reportar Bugs</a> <a href="#">Noticias</a>
         </nav>
     </header> 
+
+    <div class="wolf-trigger" onclick="toggleWolf()">🐺</div>
+    <div id="wolf-chat">
+        <div class="chat-header">
+            <span>Asistente Lobo Rojo</span>
+            <span style="cursor:pointer" onclick="toggleWolf()">×</span>
+        </div>
+        <div class="chat-body" id="wolf-msgs">
+            <div class="msg bot">¡Grrr! Soy el Lobo Rojo. ¿En qué parte de la misión necesitas ayuda estratégica?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="wolf-input" placeholder="Pregunta algo..." onkeypress="if(event.key=='Enter') sendWolfMsg()">
+            <button onclick="sendWolfMsg()">➤</button>
+        </div>
+    </div>
 
     <div id="inicio" class="page active">
         <div class="container">
@@ -516,16 +602,37 @@
                 btn.style.display = "none";
             }
         };
+
+        // LÓGICA DEL ASISTENTE (NUEVO)
+        function toggleWolf() {
+            const chat = document.getElementById('wolf-chat');
+            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function sendWolfMsg() {
+            const input = document.getElementById('wolf-input');
+            const msgs = document.getElementById('wolf-msgs');
+            if(input.value.trim() == "") return;
+
+            // Mensaje Usuario
+            msgs.innerHTML += `<div class="msg user">${input.value}</div>`;
+            const query = input.value.toLowerCase();
+            input.value = "";
+
+            // Respuesta Bot
+            setTimeout(() => {
+                let reply = "¡Grrr! No tengo esa información en mi olfato, pero revisa las guías de la página.";
+                if(query.includes("hola")) reply = "¡Saludos, superviviente! ¿Buscas tesoros o armas?";
+                if(query.includes("tesoro")) reply = "Los tesoros están divididos por zonas (Pueblo, Castillo e Isla). ¡Mira los videos!";
+                if(query.includes("arma")) reply = "Mi favorita es la Red9, pero el Stingray es vital para los Regeneradores.";
+                if(query.includes("s+")) reply = "Para el S+ Profesional necesitas terminar en menos de 5h 30min y máximo 15 guardados.";
+                
+                msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
+                msgs.scrollTop = msgs.scrollHeight;
+            }, 600);
+        }
     </script> 
 </body>
 </html>
 
-;
-            } else {
-                btn.style.display = "none";
-            }
-        };
-    </script> 
-</body>
-</html>
 
