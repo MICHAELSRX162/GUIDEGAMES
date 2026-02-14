@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GameGuides - Resident Evil Ultimate Edition</title>
+    <title>GameGuides - Ultimate Edition</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
@@ -25,6 +25,14 @@
             --boss-gold: #e1b12c;
             --puzzle-purple: #9b59b6;
             --bonus-green: #2ecc71;
+            /* Silent Hill */
+            --sh-rust: #cd5c5c;
+            /* Dead Space (Plasma) */
+            --ds-plasma: #ff5722;
+            /* Alan Wake 2 (Dark Place Green) */
+            --aw-green: #008f68;
+            /* Elden Ring (Grace Gold) */
+            --er-gold: #c69c36;
         } 
 
         * { box-sizing: border-box; }
@@ -75,7 +83,7 @@
 
         nav {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -83,19 +91,19 @@
         nav a { 
             color: white; 
             text-decoration: none; 
-            font-size: clamp(11px, 3vw, 13px); 
+            font-size: clamp(10px, 2.5vw, 12px); 
             text-transform: uppercase; 
             transition: 0.3s; 
             font-weight: bold;
-            padding: 5px 10px;
+            padding: 5px 8px;
             border-radius: 4px;
         } 
         nav a:hover { color: var(--accent-yellow); background: rgba(255,255,255,0.1); } 
 
-        @media (max-width: 600px) {
+        @media (max-width: 850px) {
             header { flex-direction: column; gap: 15px; }
-            nav { width: 100%; justify-content: space-between; }
-            nav a { margin: 0; font-size: 11px; text-align: center; }
+            nav { width: 100%; justify-content: center; }
+            nav a { margin: 2px; text-align: center; border: 1px solid #333; }
         }
 
         .page { display: none; padding: 20px 5%; animation: fadeIn 0.6s ease; padding-bottom: 100px; } 
@@ -288,6 +296,10 @@
             <a href="#" onclick="showPage('inicio')">Inicio</a>
             <a href="#" onclick="showPage('guia-re4')">RE4 Remake</a>
             <a href="#" onclick="showPage('guia-re8')">RE8 Village</a>
+            <a href="#" onclick="showPage('guia-sh')">Silent Hill 2</a>
+            <a href="#" onclick="showPage('guia-ds')">Dead Space</a>
+            <a href="#" onclick="showPage('guia-aw2')">Alan Wake 2</a>
+            <a href="#" onclick="showPage('guia-er')">Elden Ring</a>
             <a href="#" onclick="showPage('reportar-bugs')">Bugs</a>
         </nav>
     </header>
@@ -326,6 +338,38 @@
                         <h3>Resident Evil Village</h3>
                         <p>Jefes, Secretos, Puzzles y Coleccionables de la Aldea.</p>
                         <button class="btn-yellow" onclick="showPage('guia-re8')">Entrar</button>
+                    </div>
+                </div>
+                <div class="card" style="border-color: var(--sh-rust);">
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/capsule_616x353.jpg" alt="Silent Hill 2"></div>
+                    <div class="card-content">
+                        <h3>Silent Hill 2 Remake</h3>
+                        <p>Guía de Finales, Códigos de Cajas Fuertes y Niebla.</p>
+                        <button class="btn-yellow" style="background-color: var(--sh-rust); color: white;" onclick="showPage('guia-sh')">Entrar</button>
+                    </div>
+                </div>
+                <div class="card" style="border-color: var(--ds-plasma);">
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1693980/capsule_616x353.jpg" alt="Dead Space"></div>
+                    <div class="card-content">
+                        <h3>Dead Space Remake</h3>
+                        <p>Estrategias de Desmembramiento, Nodos y Armas.</p>
+                        <button class="btn-yellow" style="background-color: var(--ds-plasma); color: white;" onclick="showPage('guia-ds')">Entrar</button>
+                    </div>
+                </div>
+                <div class="card" style="border-color: var(--aw-green);">
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2967660/capsule_616x353.jpg" alt="Alan Wake 2"></div>
+                    <div class="card-content">
+                        <h3>Alan Wake 2</h3>
+                        <p>Códigos del Culto, Canciones de Cuna y Ecos.</p>
+                        <button class="btn-yellow" style="background-color: var(--aw-green); color: white;" onclick="showPage('guia-aw2')">Entrar</button>
+                    </div>
+                </div>
+                <div class="card" style="border-color: var(--er-gold);">
+                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg" alt="Elden Ring"></div>
+                    <div class="card-content">
+                        <h3>Elden Ring</h3>
+                        <p>Jefes Legendarios, Builds y Mapa del DLC.</p>
+                        <button class="btn-yellow" style="background-color: var(--er-gold); color: white;" onclick="showPage('guia-er')">Entrar</button>
                     </div>
                 </div>
             </div>
@@ -503,6 +547,235 @@
         </div>
     </div>
 
+    <div id="guia-sh" class="page">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--sh-rust); text-shadow: 0 0 10px rgba(205, 92, 92, 0.4);">Silent Hill 2 Remake</h1>
+            
+            <a href="https://store.steampowered.com/app/2124490/SILENT_HILL_2/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
+            </a>
+
+            <div class="info-box" style="border-color: var(--sh-rust);">
+                <h3 style="color: var(--sh-rust);">⚠️ Advertencia de Niebla</h3>
+                <p>Las soluciones de los puzzles cambian según la <b>dificultad</b> elegida al inicio. Asegúrate de mirar la columna correcta.</p>
+            </div>
+
+            <h2 style="color: var(--sh-rust);">🗝️ Guía de Finales</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th style="background: var(--sh-rust); color: white;">Final</th><th>Requisito Clave</th><th>Acciones</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name" style="color: var(--sh-rust);">Leave (Partida)</td><td>Vivir</td><td>Cúrate a menudo, escucha la conversación completa en el pasillo final, no examines el cuchillo de Angela.</td></tr>
+                        <tr><td class="boss-name" style="color: var(--sh-rust);">In Water (Agua)</td><td>Suicidio</td><td>Mantén la salud baja, examina el cuchillo de Angela, lee el diario en la azotea del hospital.</td></tr>
+                        <tr><td class="boss-name" style="color: var(--sh-rust);">Maria</td><td>Protegerla</td><td>No dejes que sufra daño, visítala en el hospital, no examines la foto de Mary.</td></tr>
+                        <tr><td class="boss-name" style="color: var(--sh-rust);">Bliss</td><td>New Game+</td><td>Bebe el "White Chrism" (Hospital) en la habitación 312 del Hotel.</td></tr>
+                        <tr><td class="boss-name" style="color: var(--sh-rust);">Dog (Perro)</td><td>New Game+</td><td>Encuentra las 2 mitades de la llave de hueso y abre la sala de observación en el Hotel.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--puzzle-purple);">🔒 Códigos y Cajas Fuertes (Dificultad Estándar)</h2>
+            <div class="table-wrapper">
+                <table class="puzzle-table">
+                    <thead><tr><th>Ubicación</th><th>Objeto</th><th>Código / Solución</th></tr></thead>
+                    <tbody>
+                        <tr><td class="puzzle-loc">Recepción Apts. Woodside</td><td>Caja Fuerte</td><td class="puzzle-sol">Derecha 37, Izq 12, Der 4</td></tr>
+                        <tr><td class="puzzle-loc">Motel Jack's</td><td>Caja Fuerte</td><td class="puzzle-sol">0451</td></tr>
+                        <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Candado Recepción</td><td class="puzzle-sol">724</td></tr>
+                        <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Teclado Enfermería</td><td class="puzzle-sol">3578</td></tr>
+                        <tr><td class="puzzle-loc">Sociedad Histórica</td><td>Habitación Insectos</td><td class="puzzle-sol">931</td></tr>
+                        <tr><td class="puzzle-loc">Hotel Lakeview</td><td>Maletín (Lectura)</td><td class="puzzle-sol">DEED DONE</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--bonus-green);">❓ Acertijos Complejos</h2>
+            <div class="walkthrough-container">
+                <div class="step-card" style="border-color: var(--sh-rust);">
+                    <div class="step-number" style="background: var(--sh-rust); color: white;">1</div>
+                    <div class="step-content">
+                        <h4>La Caja de Música (Hotel Lakeview)</h4>
+                        <p>Coloca las figuras así: <b>Cenicienta</b> (Izquierda), <b>Blancanieves</b> (Centro), <b>Sirenita</b> (Derecha). Gira las llaves: 7 veces, 5 veces, 1 vez.</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--sh-rust);">
+                    <div class="step-number" style="background: var(--sh-rust); color: white;">2</div>
+                    <div class="step-content">
+                        <h4>Puzzle de las Monedas (Apt. Woodside)</h4>
+                        <p>Hombre (1), Mujer (2), Flor (3), Espada (4), Árbol (5). El orden cambia según el poema, pero en Estándar suele ser: Hombre-Vacío-Mujer-Flor-Espada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-yellow" style="background-color: var(--sh-rust); color: white;" onclick="showPage('inicio')">Volver</button>
+        </div>
+    </div>
+
+    <div id="guia-ds" class="page">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--ds-plasma); text-shadow: 0 0 10px rgba(255, 87, 34, 0.4);">Dead Space Remake</h1>
+            
+            <a href="https://store.steampowered.com/app/1693980/Dead_Space/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
+            </a>
+
+            <div class="info-box" style="border-color: var(--ds-plasma);">
+                <h3 style="color: var(--ds-plasma);">🔧 Regla de Oro: "Corta sus extremidades"</h3>
+                <p>No dispares a la cabeza o al cuerpo. Apunta siempre a las piernas para frenarlos y luego a los brazos. Usa la telequinesis para lanzar garras.</p>
+            </div>
+
+            <h2 style="color: var(--ds-plasma);">🔫 Mejores Armas y Uso</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th style="background: var(--ds-plasma); color: white;">Arma</th><th>Función Principal</th><th>Mejora Clave</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Cortadora de Plasma</td><td>Todo terreno</td><td>Munición de calor (fuego)</td></tr>
+                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Rifle de Impulsos</td><td>Minas de proximidad</td><td>Lanzagranadas alternativo</td></tr>
+                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Rayo de Contacto</td><td>Matar Brutos/Jefes</td><td>Supercarga</td></tr>
+                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Cañón Lineal</td><td>Trampas láser</td><td>Amplitud de fotones</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--puzzle-purple);">🧬 Ubicación de Nodos de Energía (Primeros Caps)</h2>
+            <div class="walkthrough-container">
+                <div class="step-card" style="border-color: var(--ds-plasma);">
+                    <div class="step-number" style="background: var(--ds-plasma); color: white;">1</div>
+                    <div class="step-content">
+                        <h4>Capítulo 1: Llegada</h4>
+                        <p>En la sala de reparación del tranvía, en la pared azul cerca de la garra mecánica.</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--ds-plasma);">
+                    <div class="step-number" style="background: var(--ds-plasma); color: white;">2</div>
+                    <div class="step-content">
+                        <h4>Capítulo 2: Cuidados Intensivos</h4>
+                        <p>Dentro de la oficina de Nicole Brennan (requiere mover estantería con Kinesis).</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--ds-plasma);">
+                    <div class="step-number" style="background: var(--ds-plasma); color: white;">3</div>
+                    <div class="step-content">
+                        <h4>Capítulo 3: Ingeniería</h4>
+                        <p>En la sala de control de la centrífuga, en un casillero amarillo en la pared norte.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-yellow" style="background-color: var(--ds-plasma); color: white;" onclick="showPage('inicio')">Volver</button>
+        </div>
+    </div>
+
+    <div id="guia-aw2" class="page">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--aw-green); text-shadow: 0 0 10px rgba(0, 250, 154, 0.4);">Alan Wake 2</h1>
+            
+            <a href="https://store.steampowered.com/app/2967660/Alan_Wake_2/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
+            </a>
+
+            <div class="info-box" style="border-color: var(--aw-green);">
+                <h3 style="color: var(--aw-green);">🔦 Mecánica de Luz y Oscuridad</h3>
+                <p>La oscuridad protege a los enemigos. Primero <b>apunta la linterna (Boost)</b> para romper el escudo, luego dispara a los puntos débiles rojos.</p>
+            </div>
+
+            <h2 style="color: var(--aw-green);">📦 Códigos de Suministros del Culto</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th style="background: var(--aw-green); color: white;">Ubicación</th><th>Pista Visual</th><th>Código</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name" style="color: var(--aw-green);">Cauldron Lake (Cabaña)</td><td>Símbolos dentro cabaña</td><td>Triángulo arriba, abajo, arriba</td></tr>
+                        <tr><td class="boss-name" style="color: var(--aw-green);">Pueblo Watery (Muelle)</td><td>Batería ballesta</td><td>5-2-7</td></tr>
+                        <tr><td class="boss-name" style="color: var(--aw-green);">Bright Falls (Bosque)</td><td>Rocas pintadas</td><td>Triángulo lado, lado, abajo</td></tr>
+                        <tr><td class="boss-name" style="color: var(--aw-green);">Coffee World</td><td>Rueda de la fortuna</td><td>147</td></tr>
+                        <tr><td class="boss-name" style="color: var(--aw-green);">Taller de Kalevala</td><td>Tazas de café</td><td>5-4-2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--puzzle-purple);">🧸 Soluciones Canciones de Cuna</h2>
+            <div class="walkthrough-container">
+                <div class="step-card" style="border-color: var(--aw-green);">
+                    <div class="step-number" style="background: var(--aw-green); color: white;">1</div>
+                    <div class="step-content">
+                        <h4>Cauldron Lake - Picnic</h4>
+                        <p>Coloca la muñeca <b>Cuervo</b> en el sol y la muñeca <b>Héroe</b> en el corazón. Sigue los pasos negros para el amuleto.</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--aw-green);">
+                    <div class="step-number" style="background: var(--aw-green); color: white;">2</div>
+                    <div class="step-content">
+                        <h4>Watery - Torre de Radio</h4>
+                        <p>Muñeca <b>Ciervo</b> en la casa. Muñeca <b>Doncella</b> en el árbol. El amuleto aparecerá junto a un ciervo muerto.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-yellow" style="background-color: var(--aw-green); color: white;" onclick="showPage('inicio')">Volver</button>
+        </div>
+    </div>
+
+    <div id="guia-er" class="page">
+        <div class="container">
+            <h1 class="hero-title" style="color: var(--er-gold); text-shadow: 0 0 10px rgba(198, 156, 54, 0.4);">Elden Ring</h1>
+            
+            <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" class="btn-steam">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+                Jugar en Steam
+            </a>
+
+            <div class="info-box" style="border-color: var(--er-gold);">
+                <h3 style="color: var(--er-gold);">👑 Orden de Jefes Recomendado</h3>
+                <p>1. Margit (Stormveil) <br> 2. Godrick (Stormveil) <br> 3. Rennala (Liurnia) <br> 4. Radahn (Caelid) <br> 5. Morgott (Leyndell).</p>
+            </div>
+
+            <h2 style="color: var(--er-gold);">⚔️ Debilidades de Jefes Principales</h2>
+            <div class="table-wrapper">
+                <table class="boss-table">
+                    <thead><tr><th style="background: var(--er-gold); color: black;">Jefe (Shardbearer)</th><th>Débil A</th><th>Resistente A</th></tr></thead>
+                    <tbody>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Margit / Morgott</td><td>Corte / Putrefacción</td><td>Sagrado</td></tr>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Godrick el Injertado</td><td>Físico / Sangrado</td><td>Ninguna específica</td></tr>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Rennala</td><td>Físico / Gravedad</td><td>Magia (Muy alta)</td></tr>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Starscourge Radahn</td><td>Putrefacción Escarlata</td><td>Sagrado</td></tr>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Malenia</td><td>Fuego / Congelación</td><td>Putrefacción / Sagrado</td></tr>
+                        <tr><td class="boss-name" style="color: var(--er-gold);">Radagon / Elden Beast</td><td>Fuego (Radagon) / Físico</td><td>Sagrado (Absorbe salud)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="color: var(--primary-blue);">🔥 Talismanes Legendarios</h2>
+            <div class="walkthrough-container">
+                <div class="step-card" style="border-color: var(--er-gold);">
+                    <div class="step-number" style="background: var(--er-gold); color: black;">1</div>
+                    <div class="step-content">
+                        <h4>Erdtree's Favor +2</h4>
+                        <p>En Leyndell, Capital de Ceniza. Desde el sitio de gracia "Tierras Prohibidas", regresa hacia la ciudad. Está custodiado por tres espíritus de árbol.</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--er-gold);">
+                    <div class="step-number" style="background: var(--er-gold); color: black;">2</div>
+                    <div class="step-content">
+                        <h4>Dragoncrest Greatshield</h4>
+                        <p>En Elphael (Haligtree). Cerca del sitio de gracia "Canal de Drenaje", sube por las raíces hasta el techo de la iglesia y déjate caer por un agujero.</p>
+                    </div>
+                </div>
+                <div class="step-card" style="border-color: var(--er-gold);">
+                    <div class="step-number" style="background: var(--er-gold); color: black;">3</div>
+                    <div class="step-content">
+                        <h4>Radagon Icon</h4>
+                        <p>En la Academia de Raya Lucaria. Desde el salón de debate (Jefe Lobo Rojo), sal al patio, gira a la derecha y salta la barandilla hacia la escalera secreta.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-yellow" style="background-color: var(--er-gold); color: black;" onclick="showPage('inicio')">Volver</button>
+        </div>
+    </div>
+
     <div id="reportar-bugs" class="page">
         <div class="container">
             <h1 class="hero-title">🐛 Reportar Error</h1>
@@ -543,6 +816,7 @@
     </script>
 </body>
 </html>
+
 
 
 
