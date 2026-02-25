@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GameGuides - Ultimate Edition</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -11,812 +11,572 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --card-bg: rgba(30, 30, 30, 0.85);
-            --primary-blue: #00d4ff;
-            --accent-yellow: #ffb400;
-            --text-gray: #b0b0b0;
-            --steam-blue: #1b2838;
-            --s-tier: #ff7f7f;
-            --a-tier: #ffbf7f;
-            --b-tier: #ffff7f;
-            --wolf-red: #ff4444;
-            --boss-gold: #e1b12c;
-            --puzzle-purple: #9b59b6;
-            --bonus-green: #2ecc71;
-            /* Silent Hill */
-            --sh-rust: #cd5c5c;
-            /* Dead Space (Plasma) */
-            --ds-plasma: #ff5722;
-            /* Alan Wake 2 (Dark Place Green) */
-            --aw-green: #008f68;
-            /* Elden Ring (Grace Gold) */
-            --er-gold: #c69c36;
-        } 
-
-        * { box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-            background: linear-gradient(45deg, #050505, #121212, #080808, #1a1a1a);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            font-size: 16px;
+        :root{
+            --bg-dark:#0a0a0a; --card-bg:rgba(30,30,30,0.85);
+            --primary-blue:#00d4ff; --accent-yellow:#ffb400; --text-gray:#b0b0b0;
+            --steam-blue:#1b2838; --s-tier:#ff7f7f; --a-tier:#ffbf7f; --b-tier:#ffff7f;
+            --wolf-red:#ff4444; --boss-gold:#e1b12c; --puzzle-purple:#9b59b6; --bonus-green:#2ecc71;
+            --sh-rust:#cd5c5c; --ds-plasma:#ff5722; --aw-green:#008f68; --er-gold:#c69c36;
+            --online-cyan:#00ffff;
         }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        *{box-sizing:border-box;margin:0;padding:0;}
+        html,body{width:100%;height:100%;}
+        body{
+            background-color:var(--bg-dark);
+            color:white;
+            font-family:'Montserrat',sans-serif;
+            line-height:1.6;
+            overflow-x:hidden;
+            background:linear-gradient(45deg,#050505,#121212,#080808,#1a1a1a);
+            background-size:400% 400%;
+            animation:gradientMove 15s ease infinite;
+            font-size:16px;
         }
-
-        /* HEADER DINÁMICO */
-        header {
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
-        } 
-
-        .logo { 
-            color: var(--primary-blue); 
-            font-weight: bold; 
-            font-size: clamp(20px, 5vw, 24px); 
-            text-decoration: none; 
-            cursor: pointer; 
-            flex-shrink: 0;
-        } 
-
-        nav {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
+        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        header{
+            padding:15px 5%; display:flex; justify-content:space-between; align-items:center;
+            background:rgba(0,0,0,0.95); position:sticky; top:0; z-index:1000;
+            border-bottom:1px solid #333; backdrop-filter:blur(10px); flex-wrap:wrap; width:100%;
         }
-
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-size: clamp(10px, 2.5vw, 12px); 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            font-weight: bold;
-            padding: 5px 8px;
-            border-radius: 4px;
-        } 
-        nav a:hover { color: var(--accent-yellow); background: rgba(255,255,255,0.1); } 
-
-        @media (max-width: 850px) {
-            header { flex-direction: column; gap: 15px; }
-            nav { width: 100%; justify-content: center; }
-            nav a { margin: 2px; text-align: center; border: 1px solid #333; }
-        }
-
-        .page { display: none; padding: 20px 5%; animation: fadeIn 0.6s ease; padding-bottom: 100px; } 
-        .active { display: block; } 
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        } 
-
-        .container { max-width: 1000px; margin: auto; width: 100%; }
-
-        /* SECCIÓN DE AGRADECIMIENTO */
-        .support-banner {
-            background: linear-gradient(135deg, rgba(225, 177, 44, 0.1), rgba(0, 0, 0, 0.6));
-            border: 1px solid var(--boss-gold);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(225, 177, 44, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .support-banner::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .support-banner h2 { margin-top: 0; color: var(--boss-gold); font-size: clamp(18px, 4vw, 24px); }
-        .support-banner p { margin-bottom: 0; font-size: 14px; }
-        
-        .hero-title { 
-            text-align: center; 
-            font-size: clamp(28px, 8vw, 45px);
-            color: var(--primary-blue); 
-            margin-bottom: 40px; 
-            text-shadow: 0 0 20px rgba(0,212,255,0.3);
-            line-height: 1.2;
-        } 
-
-        .guide-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; 
-        } 
-
-        .card { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s ease; border: 1px solid #333; backdrop-filter: blur(8px); } 
-        .card:hover { transform: translateY(-5px); border-color: var(--primary-blue); } 
-        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; } 
-        .card img { width: 100%; height: 100%; object-fit: cover; } 
-        .card-content { padding: 20px; } 
-
-        .btn-yellow { 
-            display: block; 
-            width: 100%; 
-            background: var(--accent-yellow); 
-            color: black; 
-            padding: 12px 0; 
-            border-radius: 6px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            margin-top: 15px; 
-            cursor: pointer; 
-            border: none; 
-            transition: 0.3s; 
-            text-align: center; 
-            font-size: 16px;
-        }
-        .btn-yellow:active { transform: scale(0.98); }
-
-        .btn-steam {
-            display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(90deg, #171a21, #1b2838); 
-            color: white; padding: 15px 20px; border-radius: 8px; 
-            text-decoration: none; font-weight: bold; gap: 10px; 
-            margin: 20px auto; border: 1px solid #2a475e; 
-            transition: 0.3s; width: 100%; max-width: 300px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            font-size: clamp(14px, 4vw, 16px);
-        }
-        .btn-steam:hover { background: #2a475e; border-color: #66c0f4; transform: translateY(-3px); }
-        .btn-steam img { width: 24px; filter: drop-shadow(0 0 2px rgba(255,255,255,0.5)); }
-
-        .info-box { background: rgba(45, 45, 45, 0.7); padding: 20px; border-left: 5px solid var(--accent-yellow); margin: 30px 0; border-radius: 0 10px 10px 0; font-size: 14px; } 
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; 
-            margin: 25px 0;
-            border-radius: 10px;
-            background: rgba(20,20,20,0.8);
-            border: 1px solid #333;
-        }
-
-        .tier-table, .boss-table, .puzzle-table, .costume-table { width: 100%; min-width: 600px; border-collapse: collapse; }
-        .tier-row { border-bottom: 2px solid #121212; }
-        .tier-badge { width: 50px; text-align: center; font-weight: bold; font-size: 20px; color: #000; padding: 10px; }
-        .s-tier { background-color: var(--s-tier); }
-        .a-tier { background-color: var(--a-tier); }
-        .b-tier { background-color: var(--b-tier); }
-        .tier-weapon-info { display: flex; align-items: center; padding: 10px; gap: 15px; }
-        .tier-weapon-img { width: 80px; height: 50px; object-fit: contain; background: #333; border-radius: 5px; padding: 5px; flex-shrink: 0; }
-
-        .boss-table th, .puzzle-table th, .costume-table th { padding: 12px; text-align: left; font-size: 14px; white-space: nowrap; }
-        .boss-table td, .puzzle-table td, .costume-table td { padding: 12px; border-bottom: 1px solid #333; font-size: 14px; }
-        
-        .boss-table th { background: var(--boss-gold); color: black; }
-        .boss-name { color: var(--boss-gold); font-weight: bold; }
-
-        .puzzle-table th { background: var(--puzzle-purple); color: white; }
-        .puzzle-loc { color: var(--puzzle-purple); font-weight: bold; }
-        .puzzle-sol { font-family: 'Courier New', monospace; background: #222; padding: 5px 8px; border-radius: 5px; color: #00d4ff; font-weight: bold; display: inline-block; white-space: nowrap; }
-
-        .costume-table th { background: var(--bonus-green); color: black; }
-        .costume-name { color: var(--bonus-green); font-weight: bold; }
-        .costume-bonus { font-style: italic; color: #ddd; }
-
-        /* ESTILOS NUEVA GUIA RE8 */
-        .walkthrough-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
-        .step-card { display: flex; align-items: center; background: rgba(20,20,20,0.6); border: 1px solid #444; border-radius: 10px; padding: 15px; transition: 0.3s; }
-        .step-card:hover { border-color: var(--accent-yellow); transform: translateX(5px); box-shadow: 0 0 10px rgba(255, 180, 0, 0.1); }
-        .step-number { font-size: 20px; font-weight: bold; color: var(--bg-dark); background: var(--accent-yellow); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%; margin-right: 15px; flex-shrink: 0; }
-        .step-content { flex: 1; }
-        .step-content h4 { margin: 0 0 5px 0; color: white; font-size: 16px; }
-        .step-content p { margin: 0; font-size: 13px; color: #ccc; }
-
-        .video-link-card { display: block; background: rgba(30,30,30,0.9); border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #333; text-decoration: none; transition: 0.3s; } 
-        .video-thumb { width: 100%; height: 0; padding-bottom: 56.25%; background-size: cover; background-position: center; position: relative; } 
-        .video-thumb::after { content: '▶'; font-size: 40px; color: white; background: rgba(0,0,0,0.6); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 2px solid white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); } 
-        .video-caption { padding: 15px; color: white; font-weight: bold; text-align: center; background: #1e1e1e; font-size: clamp(12px, 3vw, 15px); } 
-
-        .wolf-trigger { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: #111; border: 2px solid var(--wolf-red); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2500; font-size: 25px; box-shadow: 0 0 15px rgba(255, 68, 68, 0.3); transition: 0.3s; }
-        .wolf-trigger:active { transform: scale(0.9); }
-        
-        #wolf-chat { 
-            position: fixed; 
-            bottom: 80px; 
-            left: 20px; 
-            width: 300px; 
-            height: 400px; 
-            background: #121212; 
-            border: 2px solid var(--wolf-red); 
-            border-radius: 15px; 
-            display: none; 
-            flex-direction: column; 
-            z-index: 3000; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9); 
-            overflow: hidden; 
-        }
-
-        @media (max-width: 480px) {
-            #wolf-chat {
-                width: 90%;
-                left: 5%;
-                height: 50vh;
-                bottom: 80px;
-            }
-        }
-
-        .chat-header { background: var(--wolf-red); padding: 12px; font-weight: bold; display: flex; justify-content: space-between; font-size: 14px; }
-        .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; word-wrap: break-word; }
-        .bot { background: #333; align-self: flex-start; border-left: 3px solid var(--wolf-red); }
-        .user { background: var(--primary-blue); color: black; align-self: flex-end; }
-        .chat-footer { padding: 10px; display: flex; gap: 5px; background: #000; }
-        .chat-footer input { flex: 1; padding: 10px; background: #222; color: white; border: 1px solid #444; border-radius: 5px; outline: none; font-size: 14px; }
-        .chat-footer button { background: var(--wolf-red); border: none; color: white; padding: 0 15px; border-radius: 5px; cursor: pointer; font-size: 18px; }
-
-        footer { text-align: center; padding: 40px 20px; color: #555; border-top: 1px solid #222; font-size: 12px; }
+        .logo{color:var(--primary-blue); font-weight:bold; font-size:clamp(20px,5vw,24px); cursor:pointer; user-select:none;}
+        nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+        nav a{color:white; text-decoration:none; font-size:clamp(10px,2.5vw,12px); text-transform:uppercase; transition:.3s; font-weight:bold; padding:5px 8px; border-radius:4px; cursor:pointer; display:inline-block;}
+        nav a:hover{color:var(--accent-yellow); background:rgba(255,255,255,0.08);}
+        @media(max-width:850px){header{flex-direction:column;gap:15px} nav{width:100%;justify-content:center} nav a{margin:2px;text-align:center;border:1px solid #333}}
+        .page{display:none;padding:20px 5%;animation:fadeIn .6s ease;padding-bottom:100px;min-height:calc(100vh - 300px);width:100%}
+        .page.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .container{max-width:1000px;margin:0 auto;width:100%}
+        .support-banner{background:linear-gradient(135deg,rgba(225,177,44,0.1),rgba(0,0,0,0.6));border:1px solid var(--boss-gold);padding:20px;border-radius:15px;text-align:center;margin-bottom:30px;box-shadow:0 0 15px rgba(225,177,44,0.2);position:relative;overflow:hidden}
+        .support-banner::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);animation:shine 3s infinite}
+        @keyframes shine{0%{left:-100%}50%{left:100%}100%{left:100%}}
+        .support-banner h2{color:var(--boss-gold);font-size:clamp(18px,4vw,24px)} .support-banner p{font-size:14px}
+        .hero-title{text-align:center;font-size:clamp(28px,8vw,45px);color:var(--primary-blue);margin-bottom:40px;text-shadow:0 0 20px rgba(0,212,255,.3);line-height:1.2}
+        .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+        .card{background:var(--card-bg);border-radius:15px;overflow:hidden;transition:.3s;border:1px solid #333;backdrop-filter:blur(8px);cursor:pointer}
+        .card:hover{transform:translateY(-5px);border-color:var(--primary-blue)}
+        .card-img-wrapper{width:100%;height:200px;overflow:hidden}
+        .card img{width:100%;height:100%;object-fit:cover}
+        .card-content{padding:20px}
+        .btn-yellow{display:block;width:100%;background:var(--accent-yellow);color:black;padding:12px 0;border-radius:6px;font-weight:bold;margin-top:15px;border:none;cursor:pointer;transition:.3s;text-align:center;font-size:16px}
+        .btn-yellow:hover{background:#ffcc00}
+        .btn-steam{display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#171a21,#1b2838);color:white;padding:15px 20px;border-radius:8px;gap:10px;margin:20px auto;border:1px solid #2a475e;transition:.3s;width:100%;max-width:300px;box-shadow:0 4px 15px rgba(0,0,0,.5);font-size:clamp(14px,4vw,16px);text-decoration:none}
+        .btn-steam img{width:24px}
+        .info-box{background:rgba(45,45,45,0.7);padding:20px;border-left:5px solid var(--accent-yellow);margin:30px 0;border-radius:0 10px 10px 0;font-size:14px}
+        .table-wrapper{width:100%;overflow-x:auto;margin:25px 0;border-radius:10px;background:rgba(20,20,20,0.8);border:1px solid #333}
+        table{width:100%;min-width:600px;border-collapse:collapse}
+        th,td{padding:12px;text-align:left;font-size:14px;border-bottom:1px solid #333}
+        th{background:var(--boss-gold);color:black}
+        .boss-name{color:var(--boss-gold);font-weight:bold}
+        .puzzle-loc{color:var(--puzzle-purple);font-weight:bold}
+        .puzzle-sol{font-family:'Courier New',monospace;background:#222;padding:5px 8px;border-radius:5px;color:#00d4ff;font-weight:bold;display:inline-block}
+        .walkthrough-container{display:flex;flex-direction:column;gap:15px;margin-bottom:30px}
+        .step-card{display:flex;align-items:center;background:rgba(20,20,20,0.6);border:1px solid #444;border-radius:10px;padding:15px;transition:.3s}
+        .step-card:hover{border-color:var(--accent-yellow);transform:translateX(5px);box-shadow:0 0 10px rgba(255,180,0,.1)}
+        .step-number{font-size:20px;font-weight:bold;color:var(--bg-dark);background:var(--accent-yellow);width:40px;height:40px;display:flex;justify-content:center;align-items:center;border-radius:50%;margin-right:15px;flex-shrink:0}
+        .video-link-card{display:block;background:rgba(30,30,30,0.9);border-radius:12px;overflow:hidden;margin-bottom:20px;border:1px solid #333;text-decoration:none;transition:.3s}
+        .video-thumb{width:100%;height:0;padding-bottom:56.25%;background-size:cover;background-position:center;position:relative}
+        .video-thumb::after{content:'▶';font-size:40px;color:white;background:rgba(0,0,0,.6);width:60px;height:60px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:2px solid white;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+        .video-caption{padding:15px;color:white;font-weight:bold;text-align:center;background:#1e1e1e;font-size:clamp(12px,3vw,15px)}
+        /* Online */
+        .online-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:30px}
+        .online-card{background:linear-gradient(135deg,rgba(0,255,255,.05),rgba(0,0,0,.3));border:2px solid var(--online-cyan);border-radius:15px;overflow:hidden;transition:.3s;backdrop-filter:blur(8px);box-shadow:0 0 20px rgba(0,255,255,.1)}
+        .online-card-header{background:linear-gradient(90deg,var(--online-cyan),#0088ff);padding:15px;font-weight:bold;font-size:18px;color:black;text-align:center}
+        .online-card-content{padding:20px;display:flex;flex-direction:column;gap:15px}
+        .online-genre{display:inline-block;background:rgba(0,255,255,.2);color:var(--online-cyan);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+        .btn-online{display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--online-cyan),#0088ff);color:black;padding:12px 0;border-radius:8px;text-decoration:none;font-weight:bold;cursor:pointer;border:none;transition:.3s}
+        .wolf-trigger{position:fixed;bottom:20px;left:20px;width:50px;height:50px;background:#111;border:2px solid var(--wolf-red);border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:2500;font-size:25px;box-shadow:0 0 15px rgba(255,68,68,.3);transition:.3s}
+        #wolf-chat{position:fixed;bottom:80px;left:20px;width:300px;height:400px;background:#121212;border:2px solid var(--wolf-red);border-radius:15px;display:none;flex-direction:column;z-index:3000;box-shadow:0 10px 40px rgba(0,0,0,.9);overflow:hidden}
+        #wolf-chat.active{display:flex}
+        @media(max-width:480px){#wolf-chat{width:90%;left:5%;height:50vh;bottom:80px}}
+        .chat-header{background:var(--wolf-red);padding:12px;font-weight:bold;display:flex;justify-content:space-between;font-size:14px;cursor:pointer}
+        .chat-body{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;font-size:13px}
+        .msg{padding:8px 12px;border-radius:10px;max-width:85%;word-wrap:break-word}
+        .bot{background:#333;align-self:flex-start;border-left:3px solid var(--wolf-red)}
+        .user{background:var(--primary-blue);color:black;align-self:flex-end}
+        .chat-footer{padding:10px;display:flex;gap:5px;background:#000}
+        .chat-footer input{flex:1;padding:10px;background:#222;color:white;border:1px solid #444;border-radius:5px;outline:none;font-size:14px}
+        .chat-footer button{background:var(--wolf-red);border:none;color:white;padding:0 15px;border-radius:5px;cursor:pointer;font-size:18px}
+        footer{text-align:center;padding:40px 20px;color:#555;border-top:1px solid #222;font-size:12px}
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo" onclick="showPage('inicio')">GameGuides</div>
-        <nav>
-            <a href="#" onclick="showPage('inicio')">Inicio</a>
-            <a href="#" onclick="showPage('guia-re4')">RE4 Remake</a>
-            <a href="#" onclick="showPage('guia-re8')">RE8 Village</a>
-            <a href="#" onclick="showPage('guia-sh')">Silent Hill 2</a>
-            <a href="#" onclick="showPage('guia-ds')">Dead Space</a>
-            <a href="#" onclick="showPage('guia-aw2')">Alan Wake 2</a>
-            <a href="#" onclick="showPage('guia-er')">Elden Ring</a>
-            <a href="#" onclick="showPage('reportar-bugs')">Bugs</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo" onclick="showPage('inicio')">GameGuides</div>
+    <nav>
+        <a href="#" onclick="showPage('inicio')">Inicio</a>
+        <a href="#" onclick="showPage('guia-re4')">RE4 Remake</a>
+        <a href="#" onclick="showPage('guia-re8')">RE8 Village</a>
+        <a href="#" onclick="showPage('guia-sh')">Silent Hill 2</a>
+        <a href="#" onclick="showPage('guia-ds')">Dead Space</a>
+        <a href="#" onclick="showPage('guia-aw2')">Alan Wake 2</a>
+        <a href="#" onclick="showPage('guia-er')">Elden Ring</a>
+        <a href="#" onclick="showPage('juegos-online')">Online</a>
+        <a href="#" onclick="showPage('reportar-bugs')">Bugs</a>
+    </nav>
+</header>
 
-    <div class="wolf-trigger" onclick="toggleWolf()">🐺</div>
-    <div id="wolf-chat">
-        <div class="chat-header"><span>Lobo Rojo</span><span style="cursor:pointer" onclick="toggleWolf()">×</span></div>
-        <div class="chat-body" id="wolf-msgs"><div class="msg bot">¡Grrr! Sistema responsivo activado. Me ajusto a cualquier pantalla, maestro.</div></div>
-        <div class="chat-footer">
-            <input type="text" id="wolf-input" placeholder="Escribe..." onkeypress="if(event.key=='Enter') sendWolfMsg()">
-            <button onclick="sendWolfMsg()">➤</button>
+<div class="wolf-trigger" onclick="toggleWolf()">🐺</div>
+<div id="wolf-chat">
+    <div class="chat-header"><span>Lobo Rojo</span><span onclick="toggleWolf()">×</span></div>
+    <div class="chat-body" id="wolf-msgs"><div class="msg bot">¡Grrr! Sistema responsivo activado. Me ajusto a cualquier pantalla, maestro.</div></div>
+    <div class="chat-footer">
+        <input id="wolf-input" placeholder="Escribe..." onkeypress="if(event.key==='Enter') sendWolfMsg()">
+        <button onclick="sendWolfMsg()">➤</button>
+    </div>
+</div>
+
+<!-- INICIO -->
+<div id="inicio" class="page active">
+    <div class="container">
+        <div class="support-banner">
+            <h2>🎉 ¡Gracias por su apoyo!</h2>
+            <p>Gracias a nuestra increíble comunidad de supervivientes, seguimos creciendo. ¡Vuestras visitas mantienen vivo este sitio!</p>
+        </div>
+
+        <h1 class="hero-title">Centro de Guías Survival Horror</h1>
+        <div class="guide-grid">
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg" alt="RE4"></div>
+                <div class="card-content">
+                    <h3>Resident Evil 4 Remake</h3>
+                    <p>Guía Maestra: S+, Trajes, Jefes y Todos los Tesoros.</p>
+                    <button class="btn-yellow" onclick="showPage('guia-re4')">Entrar</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1196590/capsule_616x353.jpg" alt="RE8"></div>
+                <div class="card-content">
+                    <h3>Resident Evil Village</h3>
+                    <p>Jefes, Secretos, Puzzles y Coleccionables de la Aldea.</p>
+                    <button class="btn-yellow" onclick="showPage('guia-re8')">Entrar</button>
+                </div>
+            </div>
+            <div class="card" style="border-color:var(--sh-rust)">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/capsule_616x353.jpg" alt="Silent Hill 2"></div>
+                <div class="card-content">
+                    <h3>Silent Hill 2 Remake</h3>
+                    <p>Guía de Finales, Códigos de Cajas Fuertes y Niebla.</p>
+                    <button class="btn-yellow" style="background-color:var(--sh-rust);color:white" onclick="showPage('guia-sh')">Entrar</button>
+                </div>
+            </div>
+            <div class="card" style="border-color:var(--ds-plasma)">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1693980/capsule_616x353.jpg" alt="Dead Space"></div>
+                <div class="card-content">
+                    <h3>Dead Space Remake</h3>
+                    <p>Estrategias de Desmembramiento, Nodos y Armas.</p>
+                    <button class="btn-yellow" style="background-color:var(--ds-plasma);color:white" onclick="showPage('guia-ds')">Entrar</button>
+                </div>
+            </div>
+            <div class="card" style="border-color:var(--aw-green)">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2967660/capsule_616x353.jpg" alt="Alan Wake 2"></div>
+                <div class="card-content">
+                    <h3>Alan Wake 2</h3>
+                    <p>Códigos del Culto, Canciones de Cuna y Ecos.</p>
+                    <button class="btn-yellow" style="background-color:var(--aw-green);color:white" onclick="showPage('guia-aw2')">Entrar</button>
+                </div>
+            </div>
+            <div class="card" style="border-color:var(--er-gold)">
+                <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg" alt="Elden Ring"></div>
+                <div class="card-content">
+                    <h3>Elden Ring</h3>
+                    <p>Jefes Legendarios, Builds y Mapa del DLC.</p>
+                    <button class="btn-yellow" style="background-color:var(--er-gold);color:white" onclick="showPage('guia-er')">Entrar</button>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div id="inicio" class="page active">
-        <div class="container">
-            
-            <div class="support-banner">
-                <h2>🎉 ¡Gracias por su apoyo!</h2>
-                <p>Gracias a nuestra increíble comunidad de supervivientes, seguimos creciendo. ¡Vuestras visitas mantienen vivo este sitio!</p>
+<!-- RE4 -->
+<div id="guia-re4" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--wolf-red)">RE4 Remake: El Camino al S+</h1>
+        <a href="https://store.steampowered.com/app/2050650/Resident_Evil_4/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <div class="info-box">
+            <h3 style="color:var(--accent-yellow)">Requisitos Rango S+ Profesional</h3>
+            <p>• <b>Tiempo:</b> &lt; 5:30:00 <br> • <b>Guardados:</b> Máximo 15 <br> • <b>Partida:</b> Nueva Partida.</p>
+        </div>
+
+        <h2 style="color:var(--bonus-green)">🧥 Trajes y Accesorios Especiales</h2>
+        <div class="table-wrapper">
+            <table class="costume-table">
+                <thead><tr><th>Accesorio/Traje</th><th>Efecto / Bonus</th><th>Requisito Desbloqueo</th></tr></thead>
+                <tbody>
+                    <tr><td class="costume-name">Orejas de Gato</td><td class="costume-bonus">Munición Infinita</td><td>Completa Profesional con Rango S+.</td></tr>
+                    <tr><td class="costume-name">Armadura (Ashley)</td><td class="costume-bonus">Ashley Invencible</td><td>Completa Hardcore o superior con Rango A.</td></tr>
+                    <tr><td class="costume-name">Sombrero de Pollo</td><td class="costume-bonus">Reduce daño recibido</td><td>Completa Hardcore con Rango S+.</td></tr>
+                    <tr><td class="costume-name">Máscara de Gas</td><td class="costume-bonus">Aim Assist automático</td><td>Completa Profesional (Cualquier Rango).</td></tr>
+                    <tr><td class="costume-name">Gorro de Lobo</td><td class="costume-bonus">Más daño Melé</td><td>Completa Asistido con Rango S+.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--boss-gold)">💀 Debilidades y Estrategias: Jefes RE4</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th>Jefe</th><th>Debilidad</th><th>Estrategia Pro</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name">Del Lago</td><td>Boca abierta</td><td>Lanza arpones sin parar y esquiva los troncos.</td></tr>
+                    <tr><td class="boss-name">El Gigante</td><td>Plaga espalda</td><td>Cégalo con granada cuando salga la plaga y usa el rifle.</td></tr>
+                    <tr><td class="boss-name">Méndez</td><td>Columna</td><td>Usa el cuchillo para parrys y granadas en fase 2.</td></tr>
+                    <tr><td class="boss-name">Verdugo</td><td>Nitrógeno</td><td>Congélalo con tanques antes de disparar Magnum.</td></tr>
+                    <tr><td class="boss-name">Salazar</td><td>Cuerpo humano</td><td><b>Huevo Dorado:</b> Lánzalo para quitarle casi toda la vida.</td></tr>
+                    <tr><td class="boss-name">Krauser</td><td>Cuchillo</td><td>El cuchillo es más efectivo que las balas contra él.</td></tr>
+                    <tr><td class="boss-name">Saddler</td><td>Ojos en patas</td><td>Revienta los ojos para aturdirlo y apuñalar el ojo central.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--primary-blue)">💎 Trilogía de Mapas del Tesoro</h2>
+        <a href="https://www.youtube.com/watch?v=ryzwPfPpehU" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/ryzwPfPpehU/maxresdefault.jpg')"></div><div class="video-caption">TESOROS: Región del PUEBLO</div></a>
+        <a href="https://www.youtube.com/watch?v=ruv-7O5MgeE" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/ruv-7O5MgeE/maxresdefault.jpg')"></div><div class="video-caption">TESOROS: Región del CASTILLO</div></a>
+        <a href="https://www.youtube.com/watch?v=GTBvk08RjRM" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/GTBvk08RjRM/maxresdefault.jpg')"></div><div class="video-caption">TESOROS: Región de la ISLA</div></a>
+
+        <h2 style="color:var(--wolf-red)">🚀 Speedrun Skips</h2>
+        <a href="https://www.youtube.com/watch?v=OC5Qrb7-zI8" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/OC5Qrb7-zI8/maxresdefault.jpg')"></div><div class="video-caption">28 SKIPS y ATAJOS para Rango S+ (Actualizado)</div></a>
+
+        <h2 style="color:var(--accent-yellow)">🔫 Tier List de Armas</h2>
+        <div class="table-wrapper">
+            <table class="tier-table">
+                <tr class="tier-row"><td class="tier-badge s-tier">S</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-red9.png" class="tier-weapon-img"><div><strong>Red9 + Culata</strong><p>Poder destructivo puro.</p></div></td></tr>
+                <tr class="tier-row"><td class="tier-badge a-tier">A</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-escopeta-de-antidisturbios.png" class="tier-weapon-img"><div><strong>Riot Shotgun</strong><p>La mejor para despejar pasillos.</p></div></td></tr>
+                <tr class="tier-row"><td class="tier-badge b-tier">B</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-tmp.png" class="tier-weapon-img"><div><strong>TMP</strong><p>Excelente para aturdir enemigos.</p></div></td></tr>
+            </table>
+        </div>
+
+        <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- RE8 -->
+<div id="guia-re8" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--boss-gold)">RE8 Village: Estrategias</h1>
+        <a href="https://store.steampowered.com/app/1196590/Resident_Evil_Village/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <h2 style="color:var(--accent-yellow);margin-top:40px">🗺️ Guía Paso a Paso: La Pesadilla</h2>
+        <div class="walkthrough-container">
+            <div class="step-card"><div class="step-number">1</div><div class="step-content"><h4>La Aldea y Luiza</h4><p>Sobrevive al primer ataque de licántropos (huye, no pelees). Busca las dos crestas (Doncella y Demonio) para abrir la puerta al Castillo.</p></div></div>
+            <div class="step-card"><div class="step-number">2</div><div class="step-content"><h4>Castillo Dimitrescu</h4><p>Busca las 4 máscaras de ángel mientras evitas a Lady Dimitrescu. Resuelve el puzzle de las campanas y obtén el Rifle.</p></div></div>
+            <div class="step-card"><div class="step-number">3</div><div class="step-content"><h4>Casa Beneviento</h4><p>Zona de terror psicológico sin armas. Resuelve el puzzle de la muñeca (código 05-29-11) y huye del "bebé".</p></div></div>
+            <div class="step-card"><div class="step-number">4</div><div class="step-content"><h4>El Embalse (Moreau)</h4><p>Activa los molinos evitando el agua. Cuando Moreau mute, dispárale en la boca expuesta. Recoge la Manivela.</p></div></div>
+            <div class="step-card"><div class="step-number">5</div><div class="step-content"><h4>La Fábrica (Heisenberg)</h4><p>Usa los moldes para crear la Llave y la Bola de Caballo. Pelea con Soldats disparando a sus luces rojas. Batalla final en tanque.</p></div></div>
+        </div>
+
+        <h2 style="color:var(--puzzle-purple)">🧩 Soluciones de Puzzles</h2>
+        <div class="table-wrapper">
+            <table class="puzzle-table">
+                <thead><tr><th>Ubicación</th><th>Puzzle</th><th>Solución / Código</th></tr></thead>
+                <tbody>
+                    <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Candado Taller</td><td class="puzzle-sol">05-29-11</td></tr>
+                    <tr><td class="puzzle-loc">Casa del Luthier</td><td>Candado Armario</td><td class="puzzle-sol">27-09-17</td></tr>
+                    <tr><td class="puzzle-loc">Sala de Abluciones</td><td>Estatuas</td><td>Mujeres miran a la mujer (con capucha). Campesinos miran al jinete.</td></tr>
+                    <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Caja de Música</td><td>Ordena los cilindros para que las marcas coincidan (mira las grietas).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--boss-gold)">💀 Debilidades de Jefes RE8</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th>Jefe</th><th>Punto Débil</th><th>Estrategia</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name">Lady Dimitrescu</td><td>Cuerpo humano</td><td>Ataca a la mujer sobre el dragón con el rifle.</td></tr>
+                    <tr><td class="boss-name">Moreau</td><td>Figura interna</td><td>Usa explosivos y minas cuando esté en tierra.</td></tr>
+                    <tr><td class="boss-name">Heisenberg</td><td>Zonas rojas</td><td>Destruye los tanques con el cañón del tanque.</td></tr>
+                    <tr><td class="boss-name">Madre Miranda</td><td>Cabeza</td><td>Guarda la Magnum para su fase final de luz.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--primary-blue)">💰 Tesoros y Riquezas</h2>
+        <a href="https://www.youtube.com/watch?v=3scI3i1QydQ" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/3scI3i1QydQ/maxresdefault.jpg')"></div><div class="video-caption">Ubicación de TODOS los 8 Cofres Dorados (Mapa)</div></a>
+        <a href="https://www.youtube.com/watch?v=n3QKSiiQPUI" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/n3QKSiiQPUI/maxresdefault.jpg')"></div><div class="video-caption">Guía de Tesoros Combinables (Máximo Valor)</div></a>
+
+        <h2 style="color:var(--primary-blue)">🎥 Coleccionables</h2>
+        <a href="https://youtu.be/9EdEQmsR4YQ" target="_blank" class="video-link-card"><div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/9EdEQmsR4YQ/maxresdefault.jpg')"></div><div class="video-caption">Ubicación de todas las Cabras de Madera</div></a>
+
+        <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- SILENT HILL -->
+<div id="guia-sh" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--sh-rust);text-shadow:0 0 10px rgba(205,92,92,.4)">Silent Hill 2 Remake</h1>
+        <a href="https://store.steampowered.com/app/2124490/SILENT_HILL_2/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <div class="info-box" style="border-color:var(--sh-rust)"><h3 style="color:var(--sh-rust)">⚠️ Advertencia de Niebla</h3><p>Las soluciones de los puzzles cambian según la <b>dificultad</b> elegida al inicio. Asegúrate de mirar la columna correcta.</p></div>
+
+        <h2 style="color:var(--sh-rust)">🗝️ Guía de Finales</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th style="background:var(--sh-rust);color:white">Final</th><th>Requisito Clave</th><th>Acciones</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name" style="color:var(--sh-rust)">Leave (Partida)</td><td>Vivir</td><td>Cúrate a menudo, escucha la conversación completa en el pasillo final, no examines el cuchillo de Angela.</td></tr>
+                    <tr><td class="boss-name" style="color:var(--sh-rust)">In Water (Agua)</td><td>Suicidio</td><td>Mantén la salud baja, examina el cuchillo de Angela, lee el diario en la azotea del hospital.</td></tr>
+                    <tr><td class="boss-name" style="color:var(--sh-rust)">Maria</td><td>Protegerla</td><td>No dejes que sufra daño, visítala en el hospital, no examines la foto de Mary.</td></tr>
+                    <tr><td class="boss-name" style="color:var(--sh-rust)">Bliss</td><td>New Game+</td><td>Bebe el "White Chrism" (Hospital) en la habitación 312 del Hotel.</td></tr>
+                    <tr><td class="boss-name" style="color:var(--sh-rust)">Dog (Perro)</td><td>New Game+</td><td>Encuentra las 2 mitades de la llave de hueso y abre la sala de observación en el Hotel.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--puzzle-purple)">🔒 Códigos y Cajas Fuertes (Dificultad Estándar)</h2>
+        <div class="table-wrapper">
+            <table class="puzzle-table">
+                <thead><tr><th>Ubicación</th><th>Objeto</th><th>Código / Solución</th></tr></thead>
+                <tbody>
+                    <tr><td class="puzzle-loc">Recepción Apts. Woodside</td><td>Caja Fuerte</td><td class="puzzle-sol">Derecha 37, Izq 12, Der 4</td></tr>
+                    <tr><td class="puzzle-loc">Motel Jack's</td><td>Caja Fuerte</td><td class="puzzle-sol">0451</td></tr>
+                    <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Candado Recepción</td><td class="puzzle-sol">724</td></tr>
+                    <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Teclado Enfermería</td><td class="puzzle-sol">3578</td></tr>
+                    <tr><td class="puzzle-loc">Sociedad Histórica</td><td>Habitación Insectos</td><td class="puzzle-sol">931</td></tr>
+                    <tr><td class="puzzle-loc">Hotel Lakeview</td><td>Maletín (Lectura)</td><td class="puzzle-sol">DEED DONE</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--bonus-green)">❓ Acertijos Complejos</h2>
+        <div class="walkthrough-container">
+            <div class="step-card" style="border-color:var(--sh-rust)"><div class="step-number" style="background:var(--sh-rust);color:white">1</div><div class="step-content"><h4>La Caja de Música (Hotel Lakeview)</h4><p>Coloca las figuras así: <b>Cenicienta</b> (Izquierda), <b>Blancanieves</b> (Centro), <b>Sirenita</b> (Derecha). Gira las llaves: 7 veces, 5 veces, 1 vez.</p></div></div>
+            <div class="step-card" style="border-color:var(--sh-rust)"><div class="step-number" style="background:var(--sh-rust);color:white">2</div><div class="step-content"><h4>Puzzle de las Monedas (Apt. Woodside)</h4><p>Hombre (1), Mujer (2), Flor (3), Espada (4), Árbol (5). El orden cambia según el poema, pero en Estándar suele ser: Hombre-Vacío-Mujer-Flor-Espada.</p></div></div>
+        </div>
+
+        <button class="btn-yellow" style="background-color:var(--sh-rust);color:white" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- DEAD SPACE -->
+<div id="guia-ds" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--ds-plasma);text-shadow:0 0 10px rgba(255,87,34,.4)">Dead Space Remake</h1>
+        <a href="https://store.steampowered.com/app/1693980/Dead_Space/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <div class="info-box" style="border-color:var(--ds-plasma)"><h3 style="color:var(--ds-plasma)">🔧 Regla de Oro: "Corta sus extremidades"</h3><p>No dispares a la cabeza o al cuerpo. Apunta siempre a las piernas para frenarlos y luego a los brazos. Usa la telequinesis para lanzar garras.</p></div>
+
+        <h2 style="color:var(--ds-plasma)">🔫 Mejores Armas y Uso</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th style="background:var(--ds-plasma);color:white">Arma</th><th>Función Principal</th><th>Mejora Clave</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name" style="color:var(--ds-plasma)">Cortadora de Plasma</td><td>Todo terreno</td><td>Munición de calor (fuego)</td></tr>
+                    <tr><td class="boss-name" style="color:var(--ds-plasma)">Rifle de Impulsos</td><td>Minas de proximidad</td><td>Lanzagranadas alternativo</td></tr>
+                    <tr><td class="boss-name" style="color:var(--ds-plasma)">Rayo de Contacto</td><td>Matar Brutos/Jefes</td><td>Supercarga</td></tr>
+                    <tr><td class="boss-name" style="color:var(--ds-plasma)">Cañón Lineal</td><td>Trampas láser</td><td>Amplitud de fotones</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--puzzle-purple)">🧬 Ubicación de Nodos de Energía (Primeros Caps)</h2>
+        <div class="walkthrough-container">
+            <div class="step-card" style="border-color:var(--ds-plasma)"><div class="step-number" style="background:var(--ds-plasma);color:white">1</div><div class="step-content"><h4>Capítulo 1: Llegada</h4><p>En la sala de reparación del tranvía, en la pared azul cerca de la garra mecánica.</p></div></div>
+            <div class="step-card" style="border-color:var(--ds-plasma)"><div class="step-number" style="background:var(--ds-plasma);color:white">2</div><div class="step-content"><h4>Capítulo 2: Cuidados Intensivos</h4><p>Dentro de la oficina de Nicole Brennan (requiere mover estantería con Kinesis).</p></div></div>
+            <div class="step-card" style="border-color:var(--ds-plasma)"><div class="step-number" style="background:var(--ds-plasma);color:white">3</div><div class="step-content"><h4>Capítulo 3: Ingeniería</h4><p>En la sala de control de la centrífuga, en un casillero amarillo en la pared norte.</p></div></div>
+        </div>
+
+        <button class="btn-yellow" style="background-color:var(--ds-plasma);color:white" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- ALAN WAKE 2 -->
+<div id="guia-aw2" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--aw-green);text-shadow:0 0 10px rgba(0,250,154,.4)">Alan Wake 2</h1>
+        <a href="https://store.steampowered.com/app/2967660/Alan_Wake_2/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <div class="info-box" style="border-color:var(--aw-green)"><h3 style="color:var(--aw-green)">🔦 Mecánica de Luz y Oscuridad</h3><p>La oscuridad protege a los enemigos. Primero <b>apunta la linterna (Boost)</b> para romper el escudo, luego dispara a los puntos débiles rojos.</p></div>
+
+        <h2 style="color:var(--aw-green)">📦 Códigos de Suministros del Culto</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th style="background:var(--aw-green);color:white">Ubicación</th><th>Pista Visual</th><th>Código</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name" style="color:var(--aw-green)">Cauldron Lake (Cabaña)</td><td>Símbolos dentro cabaña</td><td>Triángulo arriba, abajo, arriba</td></tr>
+                    <tr><td class="boss-name" style="color:var(--aw-green)">Pueblo Watery (Muelle)</td><td>Batería ballesta</td><td>5-2-7</td></tr>
+                    <tr><td class="boss-name" style="color:var(--aw-green)">Bright Falls (Bosque)</td><td>Rocas pintadas</td><td>Triángulo lado, lado, abajo</td></tr>
+                    <tr><td class="boss-name" style="color:var(--aw-green)">Coffee World</td><td>Rueda de la fortuna</td><td>147</td></tr>
+                    <tr><td class="boss-name" style="color:var(--aw-green)">Taller de Kalevala</td><td>Tazas de café</td><td>5-4-2</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--puzzle-purple)">🧸 Soluciones Canciones de Cuna</h2>
+        <div class="walkthrough-container">
+            <div class="step-card" style="border-color:var(--aw-green)"><div class="step-number" style="background:var(--aw-green);color:white">1</div><div class="step-content"><h4>Cauldron Lake - Picnic</h4><p>Coloca la muñeca <b>Cuervo</b> en el sol y la muñeca <b>Héroe</b> en el corazón. Sigue los pasos negros para el amuleto.</p></div></div>
+            <div class="step-card" style="border-color:var(--aw-green)"><div class="step-number" style="background:var(--aw-green);color:white">2</div><div class="step-content"><h4>Watery - Torre de Radio</h4><p>Muñeca <b>Ciervo</b> en la casa. Muñeca <b>Doncella</b> en el árbol. El amuleto aparecerá junto a un ciervo muerto.</p></div></div>
+        </div>
+
+        <button class="btn-yellow" style="background-color:var(--aw-green);color:white" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- ELDEN RING -->
+<div id="guia-er" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--er-gold);text-shadow:0 0 10px rgba(198,156,54,.4)">Elden Ring</h1>
+        <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" class="btn-steam"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"> Jugar en Steam</a>
+
+        <div class="info-box" style="border-color:var(--er-gold)"><h3 style="color:var(--er-gold)">👑 Orden de Jefes Recomendado</h3><p>1. Margit (Stormveil) <br> 2. Godrick (Stormveil) <br> 3. Rennala (Liurnia) <br> 4. Radahn (Caelid) <br> 5. Morgott (Leyndell).</p></div>
+
+        <h2 style="color:var(--er-gold)">⚔️ Debilidades de Jefes Principales</h2>
+        <div class="table-wrapper">
+            <table class="boss-table">
+                <thead><tr><th style="background:var(--er-gold);color:black">Jefe (Shardbearer)</th><th>Débil A</th><th>Resistente A</th></tr></thead>
+                <tbody>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Margit / Morgott</td><td>Corte / Putrefacción</td><td>Sagrado</td></tr>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Godrick el Injertado</td><td>Físico / Sangrado</td><td>Ninguna específica</td></tr>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Rennala</td><td>Físico / Gravedad</td><td>Magia (Muy alta)</td></tr>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Starscourge Radahn</td><td>Putrefacción Escarlata</td><td>Sagrado</td></tr>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Malenia</td><td>Fuego / Congelación</td><td>Putrefacción / Sagrado</td></tr>
+                    <tr><td class="boss-name" style="color:var(--er-gold)">Radagon / Elden Beast</td><td>Fuego (Radagon) / Físico</td><td>Sagrado (Absorbe salud)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color:var(--primary-blue)">🔥 Talismanes Legendarios</h2>
+        <div class="walkthrough-container">
+            <div class="step-card" style="border-color:var(--er-gold)"><div class="step-number" style="background:var(--er-gold);color:black">1</div><div class="step-content"><h4>Erdtree's Favor +2</h4><p>En Leyndell, Capital de Ceniza. Desde el sitio de gracia "Tierras Prohibidas", regresa hacia la ciudad. Está custodiado por tres espíritus de árbol.</p></div></div>
+            <div class="step-card" style="border-color:var(--er-gold)"><div class="step-number" style="background:var(--er-gold);color:black">2</div><div class="step-content"><h4>Dragoncrest Greatshield</h4><p>En Elphael (Haligtree). Cerca del sitio de gracia "Canal de Drenaje", sube por las raíces hasta el techo de la iglesia y déjate caer por un agujero.</p></div></div>
+            <div class="step-card" style="border-color:var(--er-gold)"><div class="step-number" style="background:var(--er-gold);color:black">3</div><div class="step-content"><h4>Radagon Icon</h4><p>En la Academia de Raya Lucaria. Desde el salón de debate (Jefe Lobo Rojo), sal al patio, gira a la derecha y salta la barandilla hacia la escalera secreta.</p></div></div>
+        </div>
+
+        <button class="btn-yellow" style="background-color:var(--er-gold);color:black" onclick="showPage('inicio')">Volver</button>
+    </div>
+</div>
+
+<!-- JUEGOS ONLINE -->
+<div id="juegos-online" class="page">
+    <div class="container">
+        <h1 class="hero-title" style="color:var(--online-cyan)">🎮 Juegos Online Populares</h1>
+
+        <div class="online-grid">
+            <div class="online-card">
+                <div class="online-card-header">Counter-Strike 2</div>
+                <div class="online-card-content">
+                    <span class="online-genre">FPS Competitivo</span>
+                    <p class="online-desc">Táctico, estratégico y altamente competitivo. El rey indiscutible del FPS profesional.</p>
+                    <a class="btn-online" href="https://www.counter-strike.net/" target="_blank">Jugar Ahora</a>
+                </div>
             </div>
 
-            <h1 class="hero-title">Centro de Guías Survival Horror</h1>
-            <div class="guide-grid">
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg"></div>
-                    <div class="card-content">
-                        <h3>Resident Evil 4 Remake</h3>
-                        <p>Guía Maestra: S+, Trajes, Jefes y Todos los Tesoros.</p>
-                        <button class="btn-yellow" onclick="showPage('guia-re4')">Entrar</button>
-                    </div>
-                </div> 
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1196590/capsule_616x353.jpg"></div>
-                    <div class="card-content">
-                        <h3>Resident Evil Village</h3>
-                        <p>Jefes, Secretos, Puzzles y Coleccionables de la Aldea.</p>
-                        <button class="btn-yellow" onclick="showPage('guia-re8')">Entrar</button>
-                    </div>
+            <div class="online-card">
+                <div class="online-card-header">League of Legends</div>
+                <div class="online-card-content">
+                    <span class="online-genre">MOBA</span>
+                    <p class="online-desc">Estrategia en equipo, campeones únicos y jugabilidad profunda. Esports de élite.</p>
+                    <a class="btn-online" href="https://www.leagueoflegends.com/" target="_blank">Jugar Ahora</a>
                 </div>
-                <div class="card" style="border-color: var(--sh-rust);">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/capsule_616x353.jpg" alt="Silent Hill 2"></div>
-                    <div class="card-content">
-                        <h3>Silent Hill 2 Remake</h3>
-                        <p>Guía de Finales, Códigos de Cajas Fuertes y Niebla.</p>
-                        <button class="btn-yellow" style="background-color: var(--sh-rust); color: white;" onclick="showPage('guia-sh')">Entrar</button>
-                    </div>
+            </div>
+
+            <div class="online-card">
+                <div class="online-card-header">Valorant</div>
+                <div class="online-card-content">
+                    <span class="online-genre">FPS Táctico</span>
+                    <p class="online-desc">Fusión perfecta entre habilidad y estrategia. Agentes únicos con poderes especiales.</p>
+                    <a class="btn-online" href="https://playvalorant.com/" target="_blank">Jugar Ahora</a>
                 </div>
-                <div class="card" style="border-color: var(--ds-plasma);">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1693980/capsule_616x353.jpg" alt="Dead Space"></div>
-                    <div class="card-content">
-                        <h3>Dead Space Remake</h3>
-                        <p>Estrategias de Desmembramiento, Nodos y Armas.</p>
-                        <button class="btn-yellow" style="background-color: var(--ds-plasma); color: white;" onclick="showPage('guia-ds')">Entrar</button>
-                    </div>
+            </div>
+
+            <div class="online-card">
+                <div class="online-card-header">Dota 2</div>
+                <div class="online-card-content">
+                    <span class="online-genre">MOBA</span>
+                    <p class="online-desc">El MOBA más complejo y profundo. Campeonato internacional The International.</p>
+                    <a class="btn-online" href="https://www.dota2.com/" target="_blank">Jugar Ahora</a>
                 </div>
-                <div class="card" style="border-color: var(--aw-green);">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2967660/capsule_616x353.jpg" alt="Alan Wake 2"></div>
-                    <div class="card-content">
-                        <h3>Alan Wake 2</h3>
-                        <p>Códigos del Culto, Canciones de Cuna y Ecos.</p>
-                        <button class="btn-yellow" style="background-color: var(--aw-green); color: white;" onclick="showPage('guia-aw2')">Entrar</button>
-                    </div>
+            </div>
+
+            <div class="online-card">
+                <div class="online-card-header">Fortnite</div>
+                <div class="online-card-content">
+                    <span class="online-genre">Battle Royale</span>
+                    <p class="online-desc">Constructor y combatiente. Eventos épicos y cosmética única cada temporada.</p>
+                    <a class="btn-online" href="https://www.epicgames.com/fortnite/" target="_blank">Jugar Ahora</a>
                 </div>
-                <div class="card" style="border-color: var(--er-gold);">
-                    <div class="card-img-wrapper"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg" alt="Elden Ring"></div>
-                    <div class="card-content">
-                        <h3>Elden Ring</h3>
-                        <p>Jefes Legendarios, Builds y Mapa del DLC.</p>
-                        <button class="btn-yellow" style="background-color: var(--er-gold); color: white;" onclick="showPage('guia-er')">Entrar</button>
-                    </div>
+            </div>
+
+            <div class="online-card">
+                <div class="online-card-header">Call of Duty Warzone</div>
+                <div class="online-card-content">
+                    <span class="online-genre">Battle Royale / FPS</span>
+                    <p class="online-desc">Acción rápida, mapas dinámicos y crossover de franquicias. F2P totalmente.</p>
+                    <a class="btn-online" href="https://www.callofduty.com/" target="_blank">Jugar Ahora</a>
                 </div>
             </div>
         </div>
+
+        <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
     </div>
+</div>
 
-    <div id="guia-re4" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--wolf-red);">RE4 Remake: El Camino al S+</h1>
-            
-            <a href="https://store.steampowered.com/app/2050650/Resident_Evil_4/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
-
-            <div class="info-box">
-                <h3 style="color: var(--accent-yellow);">Requisitos Rango S+ Profesional</h3>
-                <p>• <b>Tiempo:</b> < 5:30:00 <br> • <b>Guardados:</b> Máximo 15 <br> • <b>Partida:</b> Nueva Partida.</p>
-            </div>
-
-            <h2 style="color: var(--bonus-green);">🧥 Trajes y Accesorios Especiales</h2>
-            <div class="table-wrapper">
-                <table class="costume-table">
-                    <thead><tr><th>Accesorio/Traje</th><th>Efecto / Bonus</th><th>Requisito Desbloqueo</th></tr></thead>
-                    <tbody>
-                        <tr><td class="costume-name">Orejas de Gato</td><td class="costume-bonus">Munición Infinita</td><td>Completa Profesional con Rango S+.</td></tr>
-                        <tr><td class="costume-name">Armadura (Ashley)</td><td class="costume-bonus">Ashley Invencible</td><td>Completa Hardcore o superior con Rango A.</td></tr>
-                        <tr><td class="costume-name">Sombrero de Pollo</td><td class="costume-bonus">Reduce daño recibido</td><td>Completa Hardcore con Rango S+.</td></tr>
-                        <tr><td class="costume-name">Máscara de Gas</td><td class="costume-bonus">Aim Assist automático</td><td>Completa Profesional (Cualquier Rango).</td></tr>
-                        <tr><td class="costume-name">Gorro de Lobo</td><td class="costume-bonus">Más daño Melé</td><td>Completa Asistido con Rango S+.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--boss-gold);">💀 Debilidades y Estrategias: Jefes RE4</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th>Jefe</th><th>Debilidad</th><th>Estrategia Pro</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name">Del Lago</td><td>Boca abierta</td><td>Lanza arpones sin parar y esquiva los troncos.</td></tr>
-                        <tr><td class="boss-name">El Gigante</td><td>Plaga espalda</td><td>Cégalo con granada cuando salga la plaga y usa el rifle.</td></tr>
-                        <tr><td class="boss-name">Méndez</td><td>Columna</td><td>Usa el cuchillo para parrys y granadas en fase 2.</td></tr>
-                        <tr><td class="boss-name">Verdugo</td><td>Nitrógeno</td><td>Congélalo con tanques antes de disparar Magnum.</td></tr>
-                        <tr><td class="boss-name">Salazar</td><td>Cuerpo humano</td><td><b>Huevo Dorado:</b> Lánzalo para quitarle casi toda la vida.</td></tr>
-                        <tr><td class="boss-name">Krauser</td><td>Cuchillo</td><td>El cuchillo es más efectivo que las balas contra él.</td></tr>
-                        <tr><td class="boss-name">Saddler</td><td>Ojos en patas</td><td>Revienta los ojos para aturdirlo y apuñalar el ojo central.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--primary-blue);">💎 Trilogía de Mapas del Tesoro</h2>
-            <a href="https://www.youtube.com/watch?v=ryzwPfPpehU" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/ryzwPfPpehU/maxresdefault.jpg');"></div>
-                <div class="video-caption">TESOROS: Región del PUEBLO</div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=ruv-7O5MgeE" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/ruv-7O5MgeE/maxresdefault.jpg');"></div>
-                <div class="video-caption">TESOROS: Región del CASTILLO</div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=GTBvk08RjRM" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/GTBvk08RjRM/maxresdefault.jpg');"></div>
-                <div class="video-caption">TESOROS: Región de la ISLA</div>
-            </a>
-
-            <h2 style="color: var(--wolf-red);">🚀 Speedrun Skips</h2>
-            <a href="https://www.youtube.com/watch?v=OC5Qrb7-zI8" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/OC5Qrb7-zI8/maxresdefault.jpg');"></div>
-                <div class="video-caption">28 SKIPS y ATAJOS para Rango S+ (Actualizado)</div>
-            </a>
-
-            <h2 style="color: var(--accent-yellow);">🔫 Tier List de Armas</h2>
-            <div class="table-wrapper">
-                <table class="tier-table">
-                    <tr class="tier-row"><td class="tier-badge s-tier">S</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-red9.png" class="tier-weapon-img"><div><strong>Red9 + Culata</strong><p>Poder destructivo puro.</p></div></td></tr>
-                    <tr class="tier-row"><td class="tier-badge a-tier">A</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-escopeta-de-antidisturbios.png" class="tier-weapon-img"><div><strong>Riot Shotgun</strong><p>La mejor para despejar pasillos.</p></div></td></tr>
-                    <tr class="tier-row"><td class="tier-badge b-tier">B</td><td class="tier-weapon-info"><img src="https://wiki.residentevil.com.br/wp-content/uploads/2023/04/re4remake-armas-tmp.png" class="tier-weapon-img"><div><strong>TMP</strong><p>Excelente para aturdir enemigos.</p></div></td></tr>
-                </table>
-            </div>
-
-            <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
+<!-- REPORTAR BUGS -->
+<div id="reportar-bugs" class="page">
+    <div class="container">
+        <h1 class="hero-title">🐛 Reportar Error</h1>
+        <div style="background:var(--card-bg);padding:25px;border-radius:15px;border:1px solid #333">
+            <form action="https://formspree.io/f/xnjbnwlq" method="POST">
+                <input type="text" name="name" placeholder="Tu Nombre" style="width:100%;padding:12px;margin-bottom:20px;background:#111;border:1px solid #444;color:white;border-radius:8px;font-size:16px" required>
+                <textarea name="message" placeholder="¿Qué error encontraste?" style="width:100%;padding:12px;height:100px;background:#111;border:1px solid #444;color:white;border-radius:8px;font-size:16px" required></textarea>
+                <button type="submit" class="btn-yellow" style="width:100%">Enviar Reporte</button>
+            </form>
         </div>
+        <button class="btn-yellow" style="margin-top:20px" onclick="showPage('inicio')">Volver</button>
     </div>
+</div>
 
-    <div id="guia-re8" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--boss-gold);">RE8 Village: Estrategias</h1>
-            
-            <a href="https://store.steampowered.com/app/1196590/Resident_Evil_Village/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
+<footer>&copy; 2026 GAMEGUIDES - DISEÑO 100% RESPONSIVO</footer>
 
-            <h2 style="color: var(--accent-yellow); margin-top: 40px;">🗺️ Guía Paso a Paso: La Pesadilla</h2>
-            <div class="walkthrough-container">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>La Aldea y Luiza</h4>
-                        <p>Sobrevive al primer ataque de licántropos (huye, no pelees). Busca las dos crestas (Doncella y Demonio) para abrir la puerta al Castillo.</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Castillo Dimitrescu</h4>
-                        <p>Busca las 4 máscaras de ángel mientras evitas a Lady Dimitrescu. Resuelve el puzzle de las campanas y obtén el Rifle.</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Casa Beneviento</h4>
-                        <p>Zona de terror psicológico sin armas. Resuelve el puzzle de la muñeca (código 05-29-11) y huye del "bebé".</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>El Embalse (Moreau)</h4>
-                        <p>Activa los molinos evitando el agua. Cuando Moreau mute, dispárale en la boca expuesta. Recoge la Manivela.</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>La Fábrica (Heisenberg)</h4>
-                        <p>Usa los moldes para crear la Llave y la Bola de Caballo. Pelea con Soldats disparando a sus luces rojas. Batalla final en tanque.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h2 style="color: var(--puzzle-purple);">🧩 Soluciones de Puzzles</h2>
-            <div class="table-wrapper">
-                <table class="puzzle-table">
-                    <thead><tr><th>Ubicación</th><th>Puzzle</th><th>Solución / Código</th></tr></thead>
-                    <tbody>
-                        <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Candado Taller</td><td class="puzzle-sol">05-29-11</td></tr>
-                        <tr><td class="puzzle-loc">Casa del Luthier</td><td>Candado Armario</td><td class="puzzle-sol">27-09-17</td></tr>
-                        <tr><td class="puzzle-loc">Sala de Abluciones</td><td>Estatuas</td><td>Mujeres miran a la mujer (con capucha). Campesinos miran al jinete.</td></tr>
-                        <tr><td class="puzzle-loc">Casa de Beneviento</td><td>Caja de Música</td><td>Ordena los cilindros para que las marcas coincidan (mira las grietas).</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--boss-gold);">💀 Debilidades de Jefes RE8</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th>Jefe</th><th>Punto Débil</th><th>Estrategia</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name">Lady Dimitrescu</td><td>Cuerpo humano</td><td>Ataca a la mujer sobre el dragón con el rifle.</td></tr>
-                        <tr><td class="boss-name">Moreau</td><td>Figura interna</td><td>Usa explosivos y minas cuando esté en tierra.</td></tr>
-                        <tr><td class="boss-name">Heisenberg</td><td>Zonas rojas</td><td>Destruye los tanques con el cañón del tanque.</td></tr>
-                        <tr><td class="boss-name">Madre Miranda</td><td>Cabeza</td><td>Guarda la Magnum para su fase final de luz.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--primary-blue);">💰 Tesoros y Riquezas</h2>
-            <a href="https://www.youtube.com/watch?v=3scI3i1QydQ" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/3scI3i1QydQ/maxresdefault.jpg');"></div>
-                <div class="video-caption">Ubicación de TODOS los 8 Cofres Dorados (Mapa)</div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=n3QKSiiQPUI" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/n3QKSiiQPUI/maxresdefault.jpg');"></div>
-                <div class="video-caption">Guía de Tesoros Combinables (Máximo Valor)</div>
-            </a>
-
-            <h2 style="color: var(--primary-blue);">🎥 Coleccionables</h2>
-            <a href="https://youtu.be/9EdEQmsR4YQ" target="_blank" class="video-link-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/9EdEQmsR4YQ/maxresdefault.jpg');"></div>
-                <div class="video-caption">Ubicación de todas las Cabras de Madera</div>
-            </a>
-
-            <button class="btn-yellow" onclick="showPage('inicio')">Volver</button>
-        </div>
-    </div>
-
-    <div id="guia-sh" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--sh-rust); text-shadow: 0 0 10px rgba(205, 92, 92, 0.4);">Silent Hill 2 Remake</h1>
-            
-            <a href="https://store.steampowered.com/app/2124490/SILENT_HILL_2/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
-
-            <div class="info-box" style="border-color: var(--sh-rust);">
-                <h3 style="color: var(--sh-rust);">⚠️ Advertencia de Niebla</h3>
-                <p>Las soluciones de los puzzles cambian según la <b>dificultad</b> elegida al inicio. Asegúrate de mirar la columna correcta.</p>
-            </div>
-
-            <h2 style="color: var(--sh-rust);">🗝️ Guía de Finales</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th style="background: var(--sh-rust); color: white;">Final</th><th>Requisito Clave</th><th>Acciones</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name" style="color: var(--sh-rust);">Leave (Partida)</td><td>Vivir</td><td>Cúrate a menudo, escucha la conversación completa en el pasillo final, no examines el cuchillo de Angela.</td></tr>
-                        <tr><td class="boss-name" style="color: var(--sh-rust);">In Water (Agua)</td><td>Suicidio</td><td>Mantén la salud baja, examina el cuchillo de Angela, lee el diario en la azotea del hospital.</td></tr>
-                        <tr><td class="boss-name" style="color: var(--sh-rust);">Maria</td><td>Protegerla</td><td>No dejes que sufra daño, visítala en el hospital, no examines la foto de Mary.</td></tr>
-                        <tr><td class="boss-name" style="color: var(--sh-rust);">Bliss</td><td>New Game+</td><td>Bebe el "White Chrism" (Hospital) en la habitación 312 del Hotel.</td></tr>
-                        <tr><td class="boss-name" style="color: var(--sh-rust);">Dog (Perro)</td><td>New Game+</td><td>Encuentra las 2 mitades de la llave de hueso y abre la sala de observación en el Hotel.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--puzzle-purple);">🔒 Códigos y Cajas Fuertes (Dificultad Estándar)</h2>
-            <div class="table-wrapper">
-                <table class="puzzle-table">
-                    <thead><tr><th>Ubicación</th><th>Objeto</th><th>Código / Solución</th></tr></thead>
-                    <tbody>
-                        <tr><td class="puzzle-loc">Recepción Apts. Woodside</td><td>Caja Fuerte</td><td class="puzzle-sol">Derecha 37, Izq 12, Der 4</td></tr>
-                        <tr><td class="puzzle-loc">Motel Jack's</td><td>Caja Fuerte</td><td class="puzzle-sol">0451</td></tr>
-                        <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Candado Recepción</td><td class="puzzle-sol">724</td></tr>
-                        <tr><td class="puzzle-loc">Hospital Brookhaven</td><td>Teclado Enfermería</td><td class="puzzle-sol">3578</td></tr>
-                        <tr><td class="puzzle-loc">Sociedad Histórica</td><td>Habitación Insectos</td><td class="puzzle-sol">931</td></tr>
-                        <tr><td class="puzzle-loc">Hotel Lakeview</td><td>Maletín (Lectura)</td><td class="puzzle-sol">DEED DONE</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--bonus-green);">❓ Acertijos Complejos</h2>
-            <div class="walkthrough-container">
-                <div class="step-card" style="border-color: var(--sh-rust);">
-                    <div class="step-number" style="background: var(--sh-rust); color: white;">1</div>
-                    <div class="step-content">
-                        <h4>La Caja de Música (Hotel Lakeview)</h4>
-                        <p>Coloca las figuras así: <b>Cenicienta</b> (Izquierda), <b>Blancanieves</b> (Centro), <b>Sirenita</b> (Derecha). Gira las llaves: 7 veces, 5 veces, 1 vez.</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--sh-rust);">
-                    <div class="step-number" style="background: var(--sh-rust); color: white;">2</div>
-                    <div class="step-content">
-                        <h4>Puzzle de las Monedas (Apt. Woodside)</h4>
-                        <p>Hombre (1), Mujer (2), Flor (3), Espada (4), Árbol (5). El orden cambia según el poema, pero en Estándar suele ser: Hombre-Vacío-Mujer-Flor-Espada.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-yellow" style="background-color: var(--sh-rust); color: white;" onclick="showPage('inicio')">Volver</button>
-        </div>
-    </div>
-
-    <div id="guia-ds" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--ds-plasma); text-shadow: 0 0 10px rgba(255, 87, 34, 0.4);">Dead Space Remake</h1>
-            
-            <a href="https://store.steampowered.com/app/1693980/Dead_Space/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
-
-            <div class="info-box" style="border-color: var(--ds-plasma);">
-                <h3 style="color: var(--ds-plasma);">🔧 Regla de Oro: "Corta sus extremidades"</h3>
-                <p>No dispares a la cabeza o al cuerpo. Apunta siempre a las piernas para frenarlos y luego a los brazos. Usa la telequinesis para lanzar garras.</p>
-            </div>
-
-            <h2 style="color: var(--ds-plasma);">🔫 Mejores Armas y Uso</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th style="background: var(--ds-plasma); color: white;">Arma</th><th>Función Principal</th><th>Mejora Clave</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Cortadora de Plasma</td><td>Todo terreno</td><td>Munición de calor (fuego)</td></tr>
-                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Rifle de Impulsos</td><td>Minas de proximidad</td><td>Lanzagranadas alternativo</td></tr>
-                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Rayo de Contacto</td><td>Matar Brutos/Jefes</td><td>Supercarga</td></tr>
-                        <tr><td class="boss-name" style="color: var(--ds-plasma);">Cañón Lineal</td><td>Trampas láser</td><td>Amplitud de fotones</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--puzzle-purple);">🧬 Ubicación de Nodos de Energía (Primeros Caps)</h2>
-            <div class="walkthrough-container">
-                <div class="step-card" style="border-color: var(--ds-plasma);">
-                    <div class="step-number" style="background: var(--ds-plasma); color: white;">1</div>
-                    <div class="step-content">
-                        <h4>Capítulo 1: Llegada</h4>
-                        <p>En la sala de reparación del tranvía, en la pared azul cerca de la garra mecánica.</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--ds-plasma);">
-                    <div class="step-number" style="background: var(--ds-plasma); color: white;">2</div>
-                    <div class="step-content">
-                        <h4>Capítulo 2: Cuidados Intensivos</h4>
-                        <p>Dentro de la oficina de Nicole Brennan (requiere mover estantería con Kinesis).</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--ds-plasma);">
-                    <div class="step-number" style="background: var(--ds-plasma); color: white;">3</div>
-                    <div class="step-content">
-                        <h4>Capítulo 3: Ingeniería</h4>
-                        <p>En la sala de control de la centrífuga, en un casillero amarillo en la pared norte.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-yellow" style="background-color: var(--ds-plasma); color: white;" onclick="showPage('inicio')">Volver</button>
-        </div>
-    </div>
-
-    <div id="guia-aw2" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--aw-green); text-shadow: 0 0 10px rgba(0, 250, 154, 0.4);">Alan Wake 2</h1>
-            
-            <a href="https://store.steampowered.com/app/2967660/Alan_Wake_2/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
-
-            <div class="info-box" style="border-color: var(--aw-green);">
-                <h3 style="color: var(--aw-green);">🔦 Mecánica de Luz y Oscuridad</h3>
-                <p>La oscuridad protege a los enemigos. Primero <b>apunta la linterna (Boost)</b> para romper el escudo, luego dispara a los puntos débiles rojos.</p>
-            </div>
-
-            <h2 style="color: var(--aw-green);">📦 Códigos de Suministros del Culto</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th style="background: var(--aw-green); color: white;">Ubicación</th><th>Pista Visual</th><th>Código</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name" style="color: var(--aw-green);">Cauldron Lake (Cabaña)</td><td>Símbolos dentro cabaña</td><td>Triángulo arriba, abajo, arriba</td></tr>
-                        <tr><td class="boss-name" style="color: var(--aw-green);">Pueblo Watery (Muelle)</td><td>Batería ballesta</td><td>5-2-7</td></tr>
-                        <tr><td class="boss-name" style="color: var(--aw-green);">Bright Falls (Bosque)</td><td>Rocas pintadas</td><td>Triángulo lado, lado, abajo</td></tr>
-                        <tr><td class="boss-name" style="color: var(--aw-green);">Coffee World</td><td>Rueda de la fortuna</td><td>147</td></tr>
-                        <tr><td class="boss-name" style="color: var(--aw-green);">Taller de Kalevala</td><td>Tazas de café</td><td>5-4-2</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--puzzle-purple);">🧸 Soluciones Canciones de Cuna</h2>
-            <div class="walkthrough-container">
-                <div class="step-card" style="border-color: var(--aw-green);">
-                    <div class="step-number" style="background: var(--aw-green); color: white;">1</div>
-                    <div class="step-content">
-                        <h4>Cauldron Lake - Picnic</h4>
-                        <p>Coloca la muñeca <b>Cuervo</b> en el sol y la muñeca <b>Héroe</b> en el corazón. Sigue los pasos negros para el amuleto.</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--aw-green);">
-                    <div class="step-number" style="background: var(--aw-green); color: white;">2</div>
-                    <div class="step-content">
-                        <h4>Watery - Torre de Radio</h4>
-                        <p>Muñeca <b>Ciervo</b> en la casa. Muñeca <b>Doncella</b> en el árbol. El amuleto aparecerá junto a un ciervo muerto.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-yellow" style="background-color: var(--aw-green); color: white;" onclick="showPage('inicio')">Volver</button>
-        </div>
-    </div>
-
-    <div id="guia-er" class="page">
-        <div class="container">
-            <h1 class="hero-title" style="color: var(--er-gold); text-shadow: 0 0 10px rgba(198, 156, 54, 0.4);">Elden Ring</h1>
-            
-            <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" class="btn-steam">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-                Jugar en Steam
-            </a>
-
-            <div class="info-box" style="border-color: var(--er-gold);">
-                <h3 style="color: var(--er-gold);">👑 Orden de Jefes Recomendado</h3>
-                <p>1. Margit (Stormveil) <br> 2. Godrick (Stormveil) <br> 3. Rennala (Liurnia) <br> 4. Radahn (Caelid) <br> 5. Morgott (Leyndell).</p>
-            </div>
-
-            <h2 style="color: var(--er-gold);">⚔️ Debilidades de Jefes Principales</h2>
-            <div class="table-wrapper">
-                <table class="boss-table">
-                    <thead><tr><th style="background: var(--er-gold); color: black;">Jefe (Shardbearer)</th><th>Débil A</th><th>Resistente A</th></tr></thead>
-                    <tbody>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Margit / Morgott</td><td>Corte / Putrefacción</td><td>Sagrado</td></tr>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Godrick el Injertado</td><td>Físico / Sangrado</td><td>Ninguna específica</td></tr>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Rennala</td><td>Físico / Gravedad</td><td>Magia (Muy alta)</td></tr>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Starscourge Radahn</td><td>Putrefacción Escarlata</td><td>Sagrado</td></tr>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Malenia</td><td>Fuego / Congelación</td><td>Putrefacción / Sagrado</td></tr>
-                        <tr><td class="boss-name" style="color: var(--er-gold);">Radagon / Elden Beast</td><td>Fuego (Radagon) / Físico</td><td>Sagrado (Absorbe salud)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 style="color: var(--primary-blue);">🔥 Talismanes Legendarios</h2>
-            <div class="walkthrough-container">
-                <div class="step-card" style="border-color: var(--er-gold);">
-                    <div class="step-number" style="background: var(--er-gold); color: black;">1</div>
-                    <div class="step-content">
-                        <h4>Erdtree's Favor +2</h4>
-                        <p>En Leyndell, Capital de Ceniza. Desde el sitio de gracia "Tierras Prohibidas", regresa hacia la ciudad. Está custodiado por tres espíritus de árbol.</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--er-gold);">
-                    <div class="step-number" style="background: var(--er-gold); color: black;">2</div>
-                    <div class="step-content">
-                        <h4>Dragoncrest Greatshield</h4>
-                        <p>En Elphael (Haligtree). Cerca del sitio de gracia "Canal de Drenaje", sube por las raíces hasta el techo de la iglesia y déjate caer por un agujero.</p>
-                    </div>
-                </div>
-                <div class="step-card" style="border-color: var(--er-gold);">
-                    <div class="step-number" style="background: var(--er-gold); color: black;">3</div>
-                    <div class="step-content">
-                        <h4>Radagon Icon</h4>
-                        <p>En la Academia de Raya Lucaria. Desde el salón de debate (Jefe Lobo Rojo), sal al patio, gira a la derecha y salta la barandilla hacia la escalera secreta.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-yellow" style="background-color: var(--er-gold); color: black;" onclick="showPage('inicio')">Volver</button>
-        </div>
-    </div>
-
-    <div id="reportar-bugs" class="page">
-        <div class="container">
-            <h1 class="hero-title">🐛 Reportar Error</h1>
-            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid #333;">
-                <form action="https://formspree.io/f/xnjbnwlq" method="POST">
-                    <input type="text" name="name" placeholder="Tu Nombre" style="width:100%; padding:12px; margin-bottom:20px; background:#111; border:1px solid #444; color:white; border-radius:8px; font-size:16px;" required>
-                    <textarea name="message" placeholder="¿Qué error encontraste?" style="width:100%; padding:12px; height:100px; background:#111; border:1px solid #444; color:white; border-radius:8px; font-size:16px;" required></textarea>
-                    <button type="submit" class="btn-yellow" style="width: 100%;">Enviar Reporte</button>
-                </form>
-            </div>
-            <button class="btn-yellow" onclick="showPage('inicio')" style="margin-top:20px;">Volver</button>
-        </div>
-    </div>
-
-    <footer>&copy; 2026 GAMEGUIDES - DISEÑO 100% RESPONSIVO</footer>
-
-    <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+<script>
+    // Navegación simple y compatible en PC
+    function showPage(pageId){
+        var pages = document.querySelectorAll('.page');
+        pages.forEach(function(p){ p.classList.remove('active'); });
+        var target = document.getElementById(pageId);
+        if(target){
+            target.classList.add('active');
+            window.scrollTo({top:0,behavior:'smooth'});
+        } else {
+            console.error('showPage: página no encontrada ->', pageId);
         }
-        function toggleWolf() {
-            const chat = document.getElementById('wolf-chat');
-            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-        }
-        function sendWolfMsg() {
-            const input = document.getElementById('wolf-input');
-            const msgs = document.getElementById('wolf-msgs');
-            if(input.value.trim() == "") return;
-            msgs.innerHTML += `<div class="msg user">${input.value}</div>`;
-            input.value = "";
-            setTimeout(() => {
-                msgs.innerHTML += `<div class="msg bot">¡Grrr! Sistema responsivo funcionando. ¿Qué más necesitas?</div>`;
-                msgs.scrollTop = msgs.scrollHeight;
-            }, 600);
-        }
-    </script>
+    }
+
+    function toggleWolf(){
+        document.getElementById('wolf-chat').classList.toggle('active');
+    }
+
+    function sendWolfMsg(){
+        var input = document.getElementById('wolf-input');
+        var msgs = document.getElementById('wolf-msgs');
+        if(!input || !msgs) return;
+        var text = input.value.trim();
+        if(text === '') return;
+        var u = document.createElement('div'); u.className = 'msg user'; u.textContent = text;
+        msgs.appendChild(u);
+        input.value = '';
+        msgs.scrollTop = msgs.scrollHeight;
+        setTimeout(function(){
+            var b = document.createElement('div'); b.className = 'msg bot'; b.textContent = '¡Grrr! Sistema responsivo funcionando. ¿Qué más necesitas?';
+            msgs.appendChild(b);
+            msgs.scrollTop = msgs.scrollHeight;
+        },600);
+    }
+
+    // Optional: ensure keyboard accessibility for nav links
+    document.querySelectorAll('nav a').forEach(function(link){
+        link.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); link.click(); }
+        });
+    });
+
+    // Debug log to confirm pages present
+    console.log('Páginas detectadas:', document.querySelectorAll('.page').length);
+</script>
 </body>
 </html>
-
 
 
 
